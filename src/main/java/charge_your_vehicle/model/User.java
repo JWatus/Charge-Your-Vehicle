@@ -1,6 +1,6 @@
 package charge_your_vehicle.model;
 
-import dto.UserDto;
+import charge_your_vehicle.dto.UserDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

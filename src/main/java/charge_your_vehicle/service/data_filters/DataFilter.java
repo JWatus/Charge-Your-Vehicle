@@ -1,4 +1,4 @@
-package charge_your_vehicle.service;
+package charge_your_vehicle.service.data_filters;
 
 import charge_your_vehicle.model.ChargingPoint;
 import org.springframework.stereotype.Service;

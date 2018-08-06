@@ -1,4 +1,4 @@
-package charge_your_vehicle.service;
+package charge_your_vehicle.service.converters;
 
 import org.springframework.stereotype.Service;
 

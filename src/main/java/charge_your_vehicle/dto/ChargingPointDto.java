@@ -1,7 +1,7 @@
 package charge_your_vehicle.dto;
 
 import charge_your_vehicle.model.ChargingPoint;
-import charge_your_vehicle.service.CoordinatesConverter;
+import charge_your_vehicle.service.converters.CoordinatesConverter;
 
 import java.util.ArrayList;
 import java.util.List;

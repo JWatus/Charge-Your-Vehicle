@@ -1,7 +1,9 @@
-package charge_your_vehicle.service;
+package charge_your_vehicle.service.data_filters;
+
+import charge_your_vehicle.service.properties.AppProperties;
 
 public class DistanceCalculator {
-    private static final double R = 6371;//km
+    private static final double R = 6371;   //km
 
     public static double distanceBetweenTwoPoints(double latitude1, double latitude2, double longitude1, double longitude2) {
 

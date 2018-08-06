@@ -1,4 +1,4 @@
-package charge_your_vehicle.service;
+package charge_your_vehicle.service.properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

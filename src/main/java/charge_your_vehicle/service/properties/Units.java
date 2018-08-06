@@ -1,4 +1,4 @@
-package charge_your_vehicle.service;
+package charge_your_vehicle.service.properties;
 
 public enum Units {
     METERS(1000),

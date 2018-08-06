@@ -21,7 +21,7 @@ public class ChargingPointDto {
     private List<ConnectionDto> connections;
 
     private boolean promoted;
-    
+
     private String stateOrProvince;
     private String postCode;
     private String title;

@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>charge_your_vehicle</name>
-    <description>Debt management solution</description>
+    <description>Find point to charge Your vehicle!</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -112,7 +112,7 @@
             <version>RELEASE</version>
         </dependency>
 
-        <!--AUTH0-->
+        <!--AUTH 0-->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>mvc-auth-commons</artifactId>

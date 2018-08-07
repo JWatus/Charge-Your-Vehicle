@@ -15,6 +15,7 @@ class DataFilterTest {
     @Test
     void findChargingStationAtTownCheck() {
 
+        //given
         List<ChargingPoint> chargingPointList = new ArrayList<>();
 
         ChargingPoint pointOne = new ChargingPoint();
@@ -29,9 +30,11 @@ class DataFilterTest {
         pointTwo.setAddressInfo(addressInfoTwo);
         chargingPointList.add(pointTwo);
 
+        //when
         List<ChargingPoint> chargPoints = new DataFilter().findChargingStationAtTown(chargingPointList,
                 "Wroclaw");
 
+        //then
         assertEquals("Wroclaw", chargPoints.get(0).getAddressInfo().getTown(), "Town: ");
         assertEquals("Wroclaw", chargPoints.get(1).getAddressInfo().getTown(), "Town: ");
     }
@@ -39,6 +42,7 @@ class DataFilterTest {
     @Test
     void findClosestChargingStationCheck() {
 
+        //given
         List<ChargingPoint> chargingPointList = new ArrayList<>();
 
         ChargingPoint pointOne = new ChargingPoint();
@@ -65,15 +69,18 @@ class DataFilterTest {
         pointThree.setAddressInfo(addressInfoThree);
         chargingPointList.add(pointThree);
 
+        //when
         ChargingPoint returnedPoint = new DataFilter().findClosestChargingStation(chargingPointList,
                 31, 16);
 
+        //then
         assertEquals(1111, returnedPoint.getAddressInfo().getId());
     }
 
     @Test
     void findChargingStationAtAreaCheck() {
 
+        //given
         List<ChargingPoint> chargingPointList = new ArrayList<>();
 
         ChargingPoint pointOne = new ChargingPoint();
@@ -108,9 +115,11 @@ class DataFilterTest {
         pointFour.setAddressInfo(addressInfoFour);
         chargingPointList.add(pointFour);
 
+        //when
         List<ChargingPoint> returnedList = new DataFilter().findChargingStationAtArea(chargingPointList,
                 30, 15, 200);
 
+        //then
         assertEquals(2, returnedList.size());
         assertEquals(1111, returnedList.get(0).getAddressInfo().getId());
         assertEquals(3333, returnedList.get(1).getAddressInfo().getId());

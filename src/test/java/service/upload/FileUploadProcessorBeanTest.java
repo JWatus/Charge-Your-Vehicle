@@ -13,10 +13,12 @@ class FileUploadProcessorBeanTest {
     @Test
     void isJsonFileUploaded() {
 
+        //when
         Throwable exception = assertThrows(JsonFileNotFound.class, () -> {
             new FileUploadProcessorBean().uploadJsonFile(null);
         });
 
+        //then
         assertEquals("No json file has been uploaded #1", exception.getMessage());
     }
 }

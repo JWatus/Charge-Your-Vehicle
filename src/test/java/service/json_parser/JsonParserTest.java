@@ -23,12 +23,12 @@ class JsonParserTest {
     @InjectMocks
     public JsonParser testee;
 
-
     @Mock
     private CustomGsonBuilder customGsonBuilder;
 
     @Test
-    public void jsonToChargingPointListDeserialize() {
+    void jsonToChargingPointListDeserialize() {
+
         MockitoAnnotations.initMocks(this);
 
         List<ChargingPoint> list = new ArrayList<>();
@@ -43,13 +43,16 @@ class JsonParserTest {
     @Test
     void jsonToChargingPointListOne() throws IOException {
 
+        //given
         String json = "{\n" +
                 "  \"id\": 99562,\n" +
                 "  \"uuid\": \"75E21538-5A47-4A8E-995A-7D07B02EEE5F\"\n" +
                 "}";
 
+        //when
         ChargingPoint point = new Gson().fromJson(json, ChargingPoint.class);
 
+        //then
         assertAll("point",
                 () -> assertEquals(99562, point.getId(), "ID: "),
                 () -> assertEquals("75E21538-5A47-4A8E-995A-7D07B02EEE5F", point.getUuid(), "UUID: ")
@@ -59,15 +62,17 @@ class JsonParserTest {
     @Test
     void jsonToChargingPointListTwo() throws IOException {
 
+        //given
         String json = "{   \"id\": 99559,\n" +
                 "  \"uuid\": \"99D22B9B-B787-4105-8236-D3871F99F9F3\" }";
 
+        //when
         ChargingPoint point = new Gson().fromJson(json, ChargingPoint.class);
 
+        //then
         assertAll("point",
                 () -> assertEquals(99559, point.getId(), "ID: "),
                 () -> assertEquals("99D22B9B-B787-4105-8236-D3871F99F9F3", point.getUuid(), "UUID: ")
         );
     }
-
 }

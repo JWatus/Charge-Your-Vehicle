@@ -8,19 +8,19 @@ import static junit.framework.TestCase.assertEquals;
 
 class AppPropertiesBeanTest {
 
-    AppPropertiesBean appPropertiesBean = new AppPropertiesBean();
+    private AppPropertiesBean appPropertiesBean = new AppPropertiesBean();
 
     @Test
-    public void shouldReturnSetValue() {
+    void shouldReturnSetValue() {
 
-        //GIVEN
+        //given
         Units expected = Units.MILES;
         appPropertiesBean.setUnits(expected);
 
-        //WHEN
+        //when
         Units result = appPropertiesBean.getCurrentUnit();
 
-        //THEN
+        //then
         assertEquals(expected, result);
     }
 }

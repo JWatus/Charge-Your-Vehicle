@@ -1,0 +1,84 @@
+package charge_your_vehicle.service.upload;
+
+import charge_your_vehicle.dao.*;
+import charge_your_vehicle.model.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public abstract class UploadProcessor {
+
+    LevelDao levelDao;
+    ConnectionDao connectionDao;
+    ChargingPointDao chargingPointDao;
+    CountryDao countryDao;
+    AddressInfoDao addressInfoDao;
+
+    public UploadProcessor() {
+    }
+
+    public UploadProcessor(LevelDao levelDao, ConnectionDao connectionDao, ChargingPointDao chargingPointDao,
+                           CountryDao countryDao, AddressInfoDao addressInfoDao) {
+        this.levelDao = levelDao;
+        this.connectionDao = connectionDao;
+        this.chargingPointDao = chargingPointDao;
+        this.countryDao = countryDao;
+        this.addressInfoDao = addressInfoDao;
+    }
+
+    void saveChargingPoints (List<ChargingPoint> chargingPointList) {
+        Set<Country> countries = new HashSet<>();
+        chargingPointList.forEach(c -> countries.add(c.getAddressInfo().getCountry()));
+        countries.forEach(c -> countryDao.save(c));
+
+        Set<AddressInfo> addressInfos = new HashSet<>();
+        chargingPointList.forEach(c -> {
+            if (!addressInfos.stream().anyMatch(a -> a.getId() == c.getAddressInfo().getId())) {
+                addressInfos.add(c.getAddressInfo());
+            }
+
+        });
+        addressInfos.forEach(c -> addressInfoDao.save(c));
+
+        Set<ChargingPoint> chargingPoints = new HashSet<>();
+        chargingPointList.forEach(c -> {
+            if (!chargingPoints.stream().anyMatch(q -> q.getId() == c.getId())) {
+                chargingPoints.add(c);
+            }
+        });
+        chargingPoints.forEach(c -> chargingPointDao.save(c));
+
+        Set<Level> levels = new HashSet<>();
+        try {
+            chargingPointList.forEach(c -> c.getConnectionList().forEach(n -> {
+
+                if (!levels.stream().anyMatch(a -> a.getId() == n.getLevel().getId())) {
+                    System.out.println("#X " + n.getLevel().getId());
+                    levels.add(n.getLevel());
+                }
+            }));
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
+        levels.forEach(c -> System.out.println(c.getId()));
+        levels.forEach(c -> levelDao.save(c));
+
+        Set<Connection> connections = new HashSet<>();
+        chargingPointList.forEach(c -> c.getConnectionList().forEach(n -> {
+            if (!connections.stream().anyMatch(a -> a.getId() == n.getId())) {
+                connections.add(n);
+            }
+        }));
+        connections.forEach(c -> { if (c.getLevel() != null) connectionDao.save(c);});
+
+    }
+
+    void clearTables() {
+        connectionDao.deleteAll();
+        levelDao.deleteAll();
+        chargingPointDao.deleteAll();
+        addressInfoDao.deleteAll();
+        countryDao.deleteAll();
+    }
+}

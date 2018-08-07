@@ -23,7 +23,6 @@ public class AddressInfoDao {
         return query.getResultList();
     }
 
-
     public List<AddressInfo> findAll() {
         final Query query = entityManager.createQuery("SELECT ai FROM AddressInfo ai");
         return query.getResultList();

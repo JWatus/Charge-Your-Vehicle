@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserBean {
 
-    UsersDao usersDao;
+    private UsersDao usersDao;
 
     public UserBean(UsersDao usersDao) {
         this.usersDao = usersDao;

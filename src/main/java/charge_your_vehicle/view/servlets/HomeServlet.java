@@ -48,6 +48,5 @@ public class HomeServlet extends HttpServlet {
         } catch (TemplateException e) {
             LOG.error("Template Exception was catched.");
         }
-
     }
 }

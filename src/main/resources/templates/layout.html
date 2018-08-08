@@ -21,16 +21,17 @@
         }
     </style>
 
-    <title><div th:utext="${title}"></div></title>
+    <title th:utext="${title}"></title>
 </head>
 <body style="padding-top: 70px;">
-<!--<div th:replace="$/common/navbar :: content"></div>-->
+<div th:replace="/body-templates/navbar :: content"></div>
 
 <div class="container body-content">
     <!--<div th:replace="${body_template} :: content"></div>-->
     <div th:replace="/body-templates/home :: content"></div>
     <div th:replace="/common/footer :: content"></div>
 </div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -42,14 +43,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
 <script>
-    // $(document).ready(function () {
-    //
-    //     $("#recordsAddedModal").modal('show');
-    //
-    // });
+    $(document).ready(function () {
 
+        $("#recordsAddedModal").modal('show');
+
+    });
 </script>
 </body>
 </html>

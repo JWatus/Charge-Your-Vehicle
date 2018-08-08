@@ -76,7 +76,7 @@ public class PromotedPointsSettingsServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "layout.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
 
         try {
             template.process(dataModel, writer);

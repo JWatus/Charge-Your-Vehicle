@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/home")
+@WebServlet("/home2")
 public class HomeServlet extends HttpServlet {
 
     public static final Logger LOG = LoggerFactory.getLogger(HomeServlet.class);
@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
             dataModel.put("userAdmin", user.getRoleAdministration());
         }
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "layout.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
 
         try {
             template.process(dataModel, writer);

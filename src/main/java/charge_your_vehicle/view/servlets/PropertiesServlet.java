@@ -57,7 +57,7 @@ public class PropertiesServlet extends HttpServlet {
         dataModel.put("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
         dataModel.put("api_key", appPropertiesBean.getGoogleApiKey());
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "layout.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
 
         try {
             template.process(dataModel, writer);

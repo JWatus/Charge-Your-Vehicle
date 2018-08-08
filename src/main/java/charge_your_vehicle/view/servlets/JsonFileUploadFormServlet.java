@@ -44,7 +44,7 @@ public class JsonFileUploadFormServlet extends HttpServlet {
             dataModel.put("recordsAdded", recordsAdded);
         }
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "layout.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
 
         try {
             template.process(dataModel, writer);

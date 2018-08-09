@@ -53,7 +53,7 @@ public class LoadDataFromApiFormServlet extends HttpServlet {
             dataModel.put("recordsAdded", recordsAdded);
         }
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
 
         try {
             template.process(dataModel, writer);

@@ -18,11 +18,8 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHomePage(HttpSession session) {
 
-        ModelAndView modelAndView = new ModelAndView("layout");
-
-        modelAndView.addObject("body_template", "home");
+        ModelAndView modelAndView = new ModelAndView("body-templates/home");
         modelAndView.addObject("title", "Home");
-        modelAndView.addObject("text", "Welcome!");
 
         Object userObject = session.getAttribute("user");
         User user;

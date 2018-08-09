@@ -10,8 +10,8 @@ import java.io.IOException;
 
 @WebFilter(
         filterName = "AuthenticationUserFilter",
-        urlPatterns = {"/about", "/find-the-closest-by-address", "/find-the-closest-in-radius-by-address", "/find-the-closest-in-radius",
-        "/find-the-closest", "/search-by-country", "/search-by-town", "/statistics"}
+        urlPatterns = {"/about2", "/find-the-closest-by-address2", "/find-the-closest-in-radius-by-address2", "/find-the-closest-in-radius2",
+        "/find-the-closest2", "/search-by-country2", "/search-by-town2", "/statistics2"}
       )
 public class AuthenticationUserFilter implements Filter {
 

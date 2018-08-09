@@ -1,11 +1,31 @@
+<!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<div class="jumbotron" th:fragment="content">
-    <h1 class="display-3"><div th:utext="${text}"></div></h1>
-    <hr class="my-4">
-    <p class="lead">This is ChargeYourVehicle App. It's an application which search charging points in the indicated area.</p>
-    <p>This Spring application allows user to find charging point according to his preference. </br>
-        There is possibility to find charging point which is closest to user's current location, all points in given radius, all points in town and all in country.</br>
-        </br>
-        Technologies used to create this application : Spring Boot, Java 8, Thymeleaf.
-    </p>
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <div class="jumbotron" th:fragment="content">
+        <h1 class="display-3">Welcome!</h1>
+        <hr class="my-4">
+        <p class="lead">This is ChargeYourVehicle App. </p> </br>
+        <p>It's an application which searches charging points in the indicated area.</p>
+    </div>
+
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
 </div>
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>

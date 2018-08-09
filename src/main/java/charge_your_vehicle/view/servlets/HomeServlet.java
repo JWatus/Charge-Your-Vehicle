@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
             dataModel.put("userAdmin", user.getRoleAdministration());
         }
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/layout.html");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
 
         try {
             template.process(dataModel, writer);

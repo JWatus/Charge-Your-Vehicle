@@ -52,7 +52,9 @@ public class SearchByCountryController extends HttpServlet {
                 List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByCountry(country));
                 if (chargingPointsDtoList.size() > 0) {
                     countryStatisticsDao.addToStatistics(country);
+                    modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("title", "Search by country");
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                 } else {
                     errorMessages(modelAndView);

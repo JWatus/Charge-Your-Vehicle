@@ -51,8 +51,9 @@ public class SearchByTownController {
                 List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByTown(town));
                 if (chargingPointsDtoList.size() > 0) {
                     townStatisticsDao.addToStatistics(town);
-                    modelAndView.addObject("body_template", "results");
+                    modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("title", "Search by town");
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                 } else {
                     errorMessages(modelAndView);

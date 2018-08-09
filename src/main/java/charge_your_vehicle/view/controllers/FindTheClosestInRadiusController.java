@@ -100,7 +100,7 @@ public class FindTheClosestInRadiusController {
 
                         List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
                         if (chargingPointsDtoList.size() > 0) {
-                            modelAndView.addObject("body_template", "results");
+                            modelAndView = new ModelAndView("body-templates/results");
                             modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                             modelAndView.addObject("title", "Find all charging points in radius");
                             modelAndView.addObject("latitude", latitude);
@@ -108,7 +108,6 @@ public class FindTheClosestInRadiusController {
                             modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
 
                         } else {
-                            modelAndView.addObject("body_template", "find-the-closest-in-radius");
                             modelAndView.addObject("title", "Find all charging points in radius");
                             modelAndView.addObject("error", "No charging points were found");
                             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));

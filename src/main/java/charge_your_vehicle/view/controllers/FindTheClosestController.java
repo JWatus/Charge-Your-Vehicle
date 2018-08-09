@@ -8,10 +8,6 @@ import charge_your_vehicle.service.data_filters.DataFilter;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.view.commons.Formaters;
-import charge_your_vehicle.view.freemarker.TemplateProvider;
-import charge_your_vehicle.view.servlets.FindTheClosestInRadiusServlet;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -21,13 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class FindTheClosestController {
-    public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusServlet.class);
+    public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusController.class);
 
     private ChargingPointDao chargingPointDao;
     private DataFilter dataFilter;
@@ -100,13 +94,13 @@ public class FindTheClosestController {
                                     latitude);
                     chargingPointsList.add(chargingPoint);
                     List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
-                    modelAndView.addObject("body_template", "results");
+                    modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("title", "Find the closest charging point");
                     modelAndView.addObject("latitude", latitude);
                     modelAndView.addObject("longitude", longitude);
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                 } catch (Exception e) {
-                    modelAndView.addObject("body_template", "find-the-closest");
                     modelAndView.addObject("title", "Find the closest charging point");
                     modelAndView.addObject("error", "No charging points were found");
                     LOG.error("No charging points were found");

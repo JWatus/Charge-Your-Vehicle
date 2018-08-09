@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <h1>Find all charging points in radius for specific address</h1>
+    <hr/>
+    <form method="get" action="/find-the-closest-in-radius-by-address">
+        <fieldset>
+            <div class='col-6'>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" name="address" class="form-control" placeholder="Enter address">
+                </div>
+                <label>Radius</label>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" name="radius" class="form-control" value="0" style="width: 80px;">
+                            <div class="input-group-append">
+                                <span class="input-group-text" th:utext="${current_unit}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        </br>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </br>
+        </br>
+    </form>
+
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
+</div>
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>
+

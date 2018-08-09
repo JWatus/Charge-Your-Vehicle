@@ -47,7 +47,7 @@ public class FindTheClosestByAddressController {
 
         LOG.info("User searched closest charging station by address");
 
-        ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
+        ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-by-address");
         modelAndView.addObject("title", "Find the closest charging point by address");
 
         String address = (String) session.getAttribute("address");

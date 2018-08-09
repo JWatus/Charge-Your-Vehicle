@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/search-by-town")
+@WebServlet("/search-by-town2")
 public class SearchByTownServlet extends HttpServlet {
 
     private ChargingPointDao chargingPointDao;

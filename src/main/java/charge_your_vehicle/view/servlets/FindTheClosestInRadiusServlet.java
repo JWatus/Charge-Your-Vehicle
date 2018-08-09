@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/find-the-closest-in-radius")
+@WebServlet("/find-the-closest-in-radius2")
 public class FindTheClosestInRadiusServlet extends HttpServlet {
     public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusServlet.class);
 

@@ -1,34 +1,27 @@
-package charge_your_vehicle.view.servlets;
+package charge_your_vehicle.view.controllers;
 
 import charge_your_vehicle.dao.ChargingPointDao;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.model.ChargingPoint;
-import charge_your_vehicle.model.User;
 import charge_your_vehicle.service.converters.CoordinatesConverter;
 import charge_your_vehicle.service.data_filters.DataFilter;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.view.commons.Formaters;
-import charge_your_vehicle.view.freemarker.TemplateProvider;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
-@WebServlet("/find-the-closest-in-radius")
-public class FindTheClosestInRadiusServlet extends HttpServlet {
-    public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusServlet.class);
+@Controller
+public class FindTheClosestInRadiusController {
+
+    public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusController.class);
 
     private ChargingPointDao chargingPointDao;
     private DataFilter dataFilter;
@@ -36,11 +29,11 @@ public class FindTheClosestInRadiusServlet extends HttpServlet {
     private AppPropertiesBean appPropertiesBean;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
 
-    public FindTheClosestInRadiusServlet(ChargingPointDao chargingPointDao,
-                                         DataFilter dataFilter,
-                                         CoordinatesConverter coordinatesConverter,
-                                         AppPropertiesBean appPropertiesBean,
-                                         ChargingPointToDtoConverterBean chargingPointToDtoConverterBean) {
+    public FindTheClosestInRadiusController(ChargingPointDao chargingPointDao,
+                                            DataFilter dataFilter,
+                                            CoordinatesConverter coordinatesConverter,
+                                            AppPropertiesBean appPropertiesBean,
+                                            ChargingPointToDtoConverterBean chargingPointToDtoConverterBean) {
         this.chargingPointDao = chargingPointDao;
         this.dataFilter = dataFilter;
         this.coordinatesConverter = coordinatesConverter;
@@ -48,30 +41,20 @@ public class FindTheClosestInRadiusServlet extends HttpServlet {
         this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> dataModel = new HashMap<>();
+    @RequestMapping(value = "/find-the-closest-in-radius", method = RequestMethod.GET)
+    public ModelAndView getFindTheClosestPage(HttpSession session) {
 
-        Object userObject = req.getSession().getAttribute("user");
-        User user;
-        if (userObject != null) {
-            user = (User) userObject;
-            dataModel.put("userSessionName", user.getName());
-            dataModel.put("userAdmin", user.getRoleAdministration());
-        }
+        ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius");
 
-        PrintWriter writer = resp.getWriter();
-        resp.setContentType("text/html;charset=UTF-8");
-        String directionLong = req.getParameter("directionLong");
-        String degreesLong = req.getParameter("degreesLong");
-        String minutesLong = req.getParameter("minutesLong");
-        String secondsLong = req.getParameter("secondLong");
-        String directionLati = req.getParameter("directionLati");
-        String degreesLati = req.getParameter("degreesLati");
-        String minutesLati = req.getParameter("minutesLati");
-        String secondsLati = req.getParameter("secondLati");
-        String radiusString = req.getParameter("radius");
-
+        String directionLong = (String) session.getAttribute("directionLong");
+        String degreesLong = (String) session.getAttribute("degreesLong");
+        String minutesLong = (String) session.getAttribute("minutesLong");
+        String secondsLong = (String) session.getAttribute("secondLong");
+        String directionLati = (String) session.getAttribute("directionLati");
+        String degreesLati = (String) session.getAttribute("degreesLati");
+        String minutesLati = (String) session.getAttribute("minutesLati");
+        String secondsLati = (String) session.getAttribute("secondLati");
+        String radiusString = (String) session.getAttribute("radius");
 
         boolean isDegreesLongNull = (degreesLong == null || degreesLong.isEmpty());
         boolean isMinutesLongNull = (minutesLong == null || minutesLong.isEmpty());
@@ -84,13 +67,12 @@ public class FindTheClosestInRadiusServlet extends HttpServlet {
         if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
                 && (isDegreesLatiNull && isMinutesLatiNull && isSecondsLatiNull)
                 && isRadiusStringNull) {
-            dataModel.put("body_template", "find-the-closest-in-radius");
-            dataModel.put("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
-            dataModel.put("title", "Find all charging points in radius");
+            modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+            modelAndView.addObject("title", "Find all charging points in radius");
         } else if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
                 || (isDegreesLatiNull && isMinutesLatiNull && isSecondsLatiNull)
                 || isRadiusStringNull) {
-            errorMessages(dataModel);
+            errorMessages(modelAndView);
         } else {
             if (isDegreesLongNull) degreesLong = "0";
             if (isMinutesLongNull) minutesLong = "0";
@@ -118,45 +100,38 @@ public class FindTheClosestInRadiusServlet extends HttpServlet {
 
                         List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
                         if (chargingPointsDtoList.size() > 0) {
-                            dataModel.put("body_template", "results");
-                            dataModel.put("chargingPoints", chargingPointsDtoList);
-                            dataModel.put("title", "Find all charging points in radius");
-                            dataModel.put("latitude", latitude);
-                            dataModel.put("longitude", longitude);
-                            dataModel.put("google_api_key", appPropertiesBean.getGoogleApiKey());
+                            modelAndView.addObject("body_template", "results");
+                            modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                            modelAndView.addObject("title", "Find all charging points in radius");
+                            modelAndView.addObject("latitude", latitude);
+                            modelAndView.addObject("longitude", longitude);
+                            modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
 
                         } else {
-                            dataModel.put("body_template", "find-the-closest-in-radius");
-                            dataModel.put("title", "Find all charging points in radius");
-                            dataModel.put("error", "No charging points were found");
-                            dataModel.put("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+                            modelAndView.addObject("body_template", "find-the-closest-in-radius");
+                            modelAndView.addObject("title", "Find all charging points in radius");
+                            modelAndView.addObject("error", "No charging points were found");
+                            modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
                             LOG.error("No charging points were found");
                         }
                     } catch (Exception e) {
-                        errorMessages(dataModel);
+                        errorMessages(modelAndView);
                         LOG.error("Exception was catched.");
                     }
                 } else {
-                    errorMessages(dataModel);
+                    errorMessages(modelAndView);
                 }
             } else {
-                errorMessages(dataModel);
+                errorMessages(modelAndView);
             }
         }
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
-
-        try {
-            template.process(dataModel, writer);
-        } catch (TemplateException e) {
-            LOG.error("Template problem occurred.");
-        }
+        return modelAndView;
     }
 
-    private void errorMessages(Map<String, Object> dataModel) {
-        dataModel.put("body_template", "find-the-closest-in-radius");
-        dataModel.put("title", "Find all charging points in radius");
-        dataModel.put("error", "Please fill the form with correct value");
-        dataModel.put("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+    private void errorMessages(ModelAndView modelAndView) {
+        modelAndView.addObject("title", "Find all charging points in radius");
+        modelAndView.addObject("error", "Please fill the form with correct value");
+        modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
     }
 
     private boolean isStringInRange(String value, int min, int max) {

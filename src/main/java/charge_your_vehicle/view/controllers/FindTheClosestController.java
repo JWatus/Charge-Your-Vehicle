@@ -53,7 +53,6 @@ public class FindTheClosestController {
         LOG.info("User searched closest charging station");
 
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest");
-        modelAndView.addObject("title", "Find the closest charging point");
 
         String directionLong = (String) session.getAttribute("directionLong");
         String degreesLong = (String) session.getAttribute("degreesLong");
@@ -73,7 +72,6 @@ public class FindTheClosestController {
 
         if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
                 && (isDegreesLatiNull && isMinutesLatiNull && isSecondsLatiNull)) {
-            modelAndView.addObject("body_template", "find-the-closest");
             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
             modelAndView.addObject("title", "Find the closest charging point");
         } else if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
@@ -121,7 +119,6 @@ public class FindTheClosestController {
     }
 
     private void errorMessages(ModelAndView modelAndView) {
-        modelAndView.addObject("body_template", "find-the-closest");
         modelAndView.addObject("title", "Find the closest charging point");
         modelAndView.addObject("error", "Please fill the form with correct value");
     }

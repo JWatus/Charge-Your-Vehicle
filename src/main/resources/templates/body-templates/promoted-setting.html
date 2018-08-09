@@ -1,3 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
 <h1>Promoted charging points settings</h1>
 <hr/>
 <#list chargingPointDtoList>
@@ -28,6 +45,14 @@
         </tbody>
     </table>
 </#list>
+
+<!--FOOTER-->
+<div th:replace="/common/footer :: content"></div>
+</div>
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>
 
 
 

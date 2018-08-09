@@ -57,10 +57,12 @@ public class SearchByTownController {
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                 } else {
                     errorMessages(modelAndView);
+                    return modelAndView;
                 }
             } catch (Exception e) {
                 errorMessages(modelAndView);
                 LOG.error("Exception was catched.");
+                return modelAndView;
             }
         }
         return modelAndView;

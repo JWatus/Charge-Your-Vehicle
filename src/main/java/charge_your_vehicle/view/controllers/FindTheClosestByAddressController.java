@@ -53,8 +53,7 @@ public class FindTheClosestByAddressController {
         String address = (String) session.getAttribute("address");
 
         if (address == null || address.isEmpty()) {
-            modelAndView.addObject("body_template", "find-the-closest-by-address");
-
+            return modelAndView;
         } else {
             Coordinates coordinates = addressToCoordinatesBean.getCoordinates(address);
             if (coordinates != null) {

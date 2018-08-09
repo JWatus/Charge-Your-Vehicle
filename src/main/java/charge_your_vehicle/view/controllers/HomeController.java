@@ -21,13 +21,6 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("body-templates/home");
         modelAndView.addObject("title", "Home");
 
-        Object userObject = session.getAttribute("user");
-        User user;
-        if (userObject != null) {
-            user = (User) userObject;
-            modelAndView.addObject("userSessionName", user.getName());
-            modelAndView.addObject("userAdmin", user.getRoleAdministration());
-        }
         return modelAndView;
     }
 }

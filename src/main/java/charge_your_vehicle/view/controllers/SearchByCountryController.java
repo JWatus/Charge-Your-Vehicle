@@ -58,18 +58,18 @@ public class SearchByCountryController extends HttpServlet {
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                 } else {
                     errorMessages(modelAndView);
+                    return modelAndView;
                 }
             } catch (Exception e) {
                 errorMessages(modelAndView);
                 LOG.error("Exception was catched.");
+                return modelAndView;
             }
         }
-
         return modelAndView;
     }
 
     private void errorMessages(ModelAndView modelAndView) {
-        modelAndView.addObject("body_template", "search-by-country");
         modelAndView.addObject("error", "No charging points found");
     }
 }

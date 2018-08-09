@@ -112,16 +112,20 @@ public class FindTheClosestInRadiusController {
                             modelAndView.addObject("error", "No charging points were found");
                             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
                             LOG.error("No charging points were found");
+                            return modelAndView;
                         }
                     } catch (Exception e) {
                         errorMessages(modelAndView);
                         LOG.error("Exception was catched.");
+                        return modelAndView;
                     }
                 } else {
                     errorMessages(modelAndView);
+                    return modelAndView;
                 }
             } else {
                 errorMessages(modelAndView);
+                return modelAndView;
             }
         }
         return modelAndView;

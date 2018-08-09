@@ -64,12 +64,12 @@ public class FindTheClosestInRadiusByAddressController {
             isRadiusCorrect = (radiusString.length() < 10);
         }
         if (address == null || address.isEmpty()) {
-            modelAndView.addObject("body_template", "find-the-closest-in-radius-by-address");
             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+            return modelAndView;
         } else if (!isRadiusCorrect) {
-            modelAndView.addObject("body_template", "find-the-closest-in-radius-by-address");
             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
             modelAndView.addObject("error", "Wrong radius. Value should be less then 999 999 999");
+            return modelAndView;
         } else {
             Coordinates coordinates = addressToCoordinatesBean.getCoordinates(address);
             if (coordinates != null) {

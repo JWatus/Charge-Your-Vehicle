@@ -104,9 +104,11 @@ public class FindTheClosestController {
                     modelAndView.addObject("title", "Find the closest charging point");
                     modelAndView.addObject("error", "No charging points were found");
                     LOG.error("No charging points were found");
+                    return modelAndView;
                 }
             } else {
                 errorMessages(modelAndView);
+                return modelAndView;
             }
         }
         return modelAndView;

@@ -20,8 +20,8 @@ public class FileUploadProcessorBean extends UploadProcessor {
 
         List<ChargingPoint> chargingPointList = new JsonParser(new CustomGsonBuilder()).jsonToChargingPointList(content);
 
-//        clearTables();
-//        saveChargingPoints(chargingPointList);
+        super.clearTables();
+        super.saveChargingPoints(chargingPointList);
 
         return chargingPointList.size();
     }

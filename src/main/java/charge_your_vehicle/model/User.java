@@ -30,6 +30,9 @@ public class User {
     @Column(name = "role_administration")
     private Boolean roleAdministration;
 
+    public User() {
+    }
+
     public String getEmail() {
         return email;
     }

@@ -18,6 +18,9 @@ public class Level {
     @OneToMany(mappedBy = "level", fetch = FetchType.EAGER)
     private List<Connection> connections;
 
+    public Level() {
+    }
+
     @Transient
     private boolean isFastChargeCapable;
 

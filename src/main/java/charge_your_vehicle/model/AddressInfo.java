@@ -36,6 +36,9 @@ public class AddressInfo {
     @Column(name = "addressLine2")
     private String addressLine2;
 
+    public AddressInfo() {
+    }
+
     @Transient
     private String contactTelephone1;
     @Transient
@@ -174,7 +177,5 @@ public class AddressInfo {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
-
-
 
 }

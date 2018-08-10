@@ -48,7 +48,7 @@ public class SearchByTownController {
             return modelAndView;
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByTown(town));
+                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByAddressInfo_Town(town));
                 if (chargingPointsDtoList.size() > 0) {
                     townStatisticsDao.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results");

@@ -19,6 +19,9 @@ public class ChargingPoint {
     @OneToMany(mappedBy = "chargingPoint", fetch = FetchType.EAGER)
     private List<Connection> connectionList;
 
+    public ChargingPoint() {
+    }
+
     @Transient
     private String uuid;
     @Transient

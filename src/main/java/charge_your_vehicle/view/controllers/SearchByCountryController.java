@@ -49,7 +49,7 @@ public class SearchByCountryController extends HttpServlet {
             modelAndView.addObject("body_template", "search-by-country");
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByCountry(country));
+                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByAddressInfo_Country(country));
                 if (chargingPointsDtoList.size() > 0) {
                     countryStatisticsDao.addToStatistics(country);
                     modelAndView = new ModelAndView("body-templates/results");

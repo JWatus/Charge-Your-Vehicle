@@ -18,6 +18,9 @@ public class Connection {
     @JoinColumn(name = "chargingPoint_id")
     private ChargingPoint chargingPoint;
 
+    public Connection() {
+    }
+
     @Transient
     private ConnectionType connectionType;
     @Transient

@@ -17,6 +17,9 @@ public class Country {
     @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private List<AddressInfo> addresses;
 
+    public Country() {
+    }
+
     @Transient
     private String isoCode;
     @Transient

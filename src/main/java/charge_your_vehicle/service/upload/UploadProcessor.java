@@ -13,21 +13,21 @@ import java.util.Set;
 public class UploadProcessor {
 
     @Autowired
-    private LevelDao levelDao;
+    private LevelRepository levelRepository;
     @Autowired
-    private ConnectionDao connectionDao;
+    private ConnectionRepository connectionRepository;
     @Autowired
-    private ChargingPointDao chargingPointDao;
+    private ChargingPointRepository chargingPointRepository;
     @Autowired
-    private CountryDao countryDao;
+    private CountryRepository countryRepository;
     @Autowired
-    private AddressInfoDao addressInfoDao;
+    private AddressInfoRepository addressInfoRepository;
 
     void saveChargingPoints(List<ChargingPoint> chargingPointList) {
 
         Set<Country> countries = new HashSet<>();
         chargingPointList.forEach(c -> countries.add(c.getAddressInfo().getCountry()));
-        countries.forEach(c -> countryDao.save(c));
+        countries.forEach(c -> countryRepository.save(c));
 
         Set<AddressInfo> addressInfos = new HashSet<>();
         chargingPointList.forEach(c -> {
@@ -35,7 +35,7 @@ public class UploadProcessor {
                 addressInfos.add(c.getAddressInfo());
             }
         });
-        addressInfos.forEach(c -> addressInfoDao.save(c));
+        addressInfos.forEach(c -> addressInfoRepository.save(c));
 
         Set<Level> levels = new HashSet<>();
         try {
@@ -50,7 +50,7 @@ public class UploadProcessor {
             x.printStackTrace();
         }
         levels.forEach(c -> System.out.println(c.getId()));
-        levels.forEach(c -> levelDao.save(c));
+        levels.forEach(c -> levelRepository.save(c));
 
         Set<Connection> connections = new HashSet<>();
         chargingPointList.forEach(c -> c.getConnectionList().forEach(n -> {
@@ -60,7 +60,7 @@ public class UploadProcessor {
             }
         }));
         connections.forEach(c -> {
-            if (c.getLevel() != null) connectionDao.save(c);
+            if (c.getLevel() != null) connectionRepository.save(c);
         });
 
         Set<ChargingPoint> chargingPoints = new HashSet<>();
@@ -70,15 +70,15 @@ public class UploadProcessor {
             }
         });
         chargingPoints.forEach(c -> {
-            chargingPointDao.save(c);
+            chargingPointRepository.save(c);
         });
     }
 
     void clearTables() {
-        connectionDao.deleteAll();
-        levelDao.deleteAll();
-        chargingPointDao.deleteAll();
-        addressInfoDao.deleteAll();
-        countryDao.deleteAll();
+        connectionRepository.deleteAll();
+        levelRepository.deleteAll();
+        chargingPointRepository.deleteAll();
+        addressInfoRepository.deleteAll();
+        countryRepository.deleteAll();
     }
 }

@@ -1,6 +1,6 @@
 package charge_your_vehicle.view.servlets;
 
-import charge_your_vehicle.dao.ChargingPointDao;
+import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.promoted.PromotedChargingPointsBean;
@@ -21,14 +21,14 @@ public class PromotedPointsSettingsController extends HttpServlet {
     public static final Logger LOG = LoggerFactory.getLogger(PromotedPointsSettingsController.class);
 
     private PromotedChargingPointsBean promotedChargingPointsBean;
-    private ChargingPointDao chargingPointDao;
+    private ChargingPointRepository chargingPointRepository;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
 
     public PromotedPointsSettingsController(PromotedChargingPointsBean promotedChargingPointsBean,
-                                            ChargingPointDao chargingPointDao,
+                                            ChargingPointRepository chargingPointRepository,
                                             ChargingPointToDtoConverterBean chargingPointToDtoConverterBean) {
         this.promotedChargingPointsBean = promotedChargingPointsBean;
-        this.chargingPointDao = chargingPointDao;
+        this.chargingPointRepository = chargingPointRepository;
         this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
     }
 
@@ -53,7 +53,7 @@ public class PromotedPointsSettingsController extends HttpServlet {
             return modelAndView;
         }
 
-        List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findAll());
+        List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointRepository.findAll());
         modelAndView.addObject("title", "Promoted Charging Points Settings");
         modelAndView.addObject("chargingPointDtoList", chargingPointsDtoList);
 

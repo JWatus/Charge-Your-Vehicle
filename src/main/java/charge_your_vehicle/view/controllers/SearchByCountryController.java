@@ -1,6 +1,6 @@
 package charge_your_vehicle.view.controllers;
 
-import charge_your_vehicle.dao.ChargingPointDao;
+import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dao.CountryStatisticsDao;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
@@ -19,16 +19,16 @@ import java.util.List;
 @Controller
 public class SearchByCountryController extends HttpServlet {
 
-    private ChargingPointDao chargingPointDao;
+    private ChargingPointRepository chargingPointRepository;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private CountryStatisticsDao countryStatisticsDao;
     private AppPropertiesBean appPropertiesBean;
 
-    public SearchByCountryController(ChargingPointDao chargingPointDao,
+    public SearchByCountryController(ChargingPointRepository chargingPointRepository,
                                      ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                      CountryStatisticsDao countryStatisticsDao,
                                      AppPropertiesBean appPropertiesBean) {
-        this.chargingPointDao = chargingPointDao;
+        this.chargingPointRepository = chargingPointRepository;
         this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.countryStatisticsDao = countryStatisticsDao;
         this.appPropertiesBean = appPropertiesBean;
@@ -49,7 +49,7 @@ public class SearchByCountryController extends HttpServlet {
             modelAndView.addObject("body_template", "search-by-country");
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByAddressInfo_Country(country));
+                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointRepository.findByAddressInfo_Country(country));
                 if (chargingPointsDtoList.size() > 0) {
                     countryStatisticsDao.addToStatistics(country);
                     modelAndView = new ModelAndView("body-templates/results");

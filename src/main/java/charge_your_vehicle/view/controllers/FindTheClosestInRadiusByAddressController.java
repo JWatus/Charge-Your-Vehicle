@@ -1,6 +1,6 @@
 package charge_your_vehicle.view.controllers;
 
-import charge_your_vehicle.dao.ChargingPointDao;
+import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.model.Coordinates;
@@ -23,20 +23,20 @@ import java.util.List;
 @Controller
 public class FindTheClosestInRadiusByAddressController {
 
-    private ChargingPointDao chargingPointDao;
+    private ChargingPointRepository chargingPointRepository;
     private DataFilter dataFilter;
     private CoordinatesConverter coordinatesConverter;
     private AppPropertiesBean appPropertiesBean;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private AddressToCoordinatesBean addressToCoordinatesBean;
 
-    public FindTheClosestInRadiusByAddressController(ChargingPointDao chargingPointDao,
+    public FindTheClosestInRadiusByAddressController(ChargingPointRepository chargingPointRepository,
                                                      DataFilter dataFilter,
                                                      CoordinatesConverter coordinatesConverter,
                                                      AppPropertiesBean appPropertiesBean,
                                                      ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                                      AddressToCoordinatesBean addressToCoordinatesBean) {
-        this.chargingPointDao = chargingPointDao;
+        this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
         this.coordinatesConverter = coordinatesConverter;
         this.appPropertiesBean = appPropertiesBean;
@@ -78,7 +78,7 @@ public class FindTheClosestInRadiusByAddressController {
                 double latitude = coordinates.getLatitude();
 
                 List<ChargingPoint> chargingPointsList = dataFilter
-                        .findChargingStationAtArea(chargingPointDao.findAll(), longitude,
+                        .findChargingStationAtArea(chargingPointRepository.findAll(), longitude,
                                 latitude, radius);
 
                 List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);

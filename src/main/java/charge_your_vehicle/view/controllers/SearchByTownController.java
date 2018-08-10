@@ -1,6 +1,6 @@
 package charge_your_vehicle.view.controllers;
 
-import charge_your_vehicle.dao.ChargingPointDao;
+import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dao.TownStatisticsDao;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
@@ -18,16 +18,16 @@ import java.util.List;
 @Controller
 public class SearchByTownController {
 
-    private ChargingPointDao chargingPointDao;
+    private ChargingPointRepository chargingPointRepository;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private TownStatisticsDao townStatisticsDao;
     private AppPropertiesBean appPropertiesBean;
 
-    public SearchByTownController(ChargingPointDao chargingPointDao,
+    public SearchByTownController(ChargingPointRepository chargingPointRepository,
                                   ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                   TownStatisticsDao townStatisticsDao,
                                   AppPropertiesBean appPropertiesBean) {
-        this.chargingPointDao = chargingPointDao;
+        this.chargingPointRepository = chargingPointRepository;
         this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.townStatisticsDao = townStatisticsDao;
         this.appPropertiesBean = appPropertiesBean;
@@ -48,7 +48,7 @@ public class SearchByTownController {
             return modelAndView;
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointDao.findByAddressInfo_Town(town));
+                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointRepository.findByAddressInfo_Town(town));
                 if (chargingPointsDtoList.size() > 0) {
                     townStatisticsDao.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results");

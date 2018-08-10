@@ -3,7 +3,6 @@ package charge_your_vehicle.view.servlets;
 import charge_your_vehicle.dao.CountryStatisticsDao;
 import charge_your_vehicle.dao.TownStatisticsDao;
 import charge_your_vehicle.model.User;
-import charge_your_vehicle.view.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -51,13 +50,6 @@ public class StatisticsServlet extends HttpServlet {
             dataModel.put("userSessionName", user.getName());
             dataModel.put("userAdmin", user.getRoleAdministration());
         }
-
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
-        try {
-            template.process(dataModel, writer);
-        } catch (TemplateException e) {
-            LOG.error("Template Exception was catched.");
-        }
     }
 
     @Override
@@ -87,19 +79,6 @@ public class StatisticsServlet extends HttpServlet {
                 dataModel.put("body_template", "show-statistics");
                 dataModel.put("locationList", locationList);
             }
-        }
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
-        try {
-            Object userObject = req.getSession().getAttribute("user");
-            User user;
-            if (userObject != null) {
-                user = (User) userObject;
-                dataModel.put("userSessionName", user.getName());
-                dataModel.put("userAdmin", user.getRoleAdministration());
-            }
-            template.process(dataModel, writer);
-        } catch (TemplateException e) {
-            LOG.error("Template Exception was catched.");
         }
     }
 }

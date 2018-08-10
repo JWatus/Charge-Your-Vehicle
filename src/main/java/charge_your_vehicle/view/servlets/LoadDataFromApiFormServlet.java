@@ -3,7 +3,6 @@ package charge_your_vehicle.view.servlets;
 
 import charge_your_vehicle.model.User;
 import charge_your_vehicle.service.upload.ApiUploadProcessorBean;
-import charge_your_vehicle.view.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -51,14 +50,6 @@ public class LoadDataFromApiFormServlet extends HttpServlet {
         String recordsAdded = req.getParameter("recordsAdded");
         if (recordsAdded != null && !recordsAdded.isEmpty()) {
             dataModel.put("recordsAdded", recordsAdded);
-        }
-
-        Template template = TemplateProvider.createTemplate(getServletContext(), "templates/body-templates/home.html");
-
-        try {
-            template.process(dataModel, writer);
-        } catch (TemplateException e) {
-            LOG.error("Template Exception was catched.");
         }
     }
 }

@@ -9,11 +9,11 @@ import java.util.Set;
 
 public abstract class UploadProcessor {
 
-    LevelDao levelDao;
-    ConnectionDao connectionDao;
-    ChargingPointDao chargingPointDao;
-    CountryDao countryDao;
-    AddressInfoDao addressInfoDao;
+    private LevelDao levelDao;
+    private ConnectionDao connectionDao;
+    private ChargingPointDao chargingPointDao;
+    private CountryDao countryDao;
+    private AddressInfoDao addressInfoDao;
 
     public UploadProcessor() {
     }

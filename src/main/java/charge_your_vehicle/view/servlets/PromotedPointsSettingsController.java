@@ -1,8 +1,7 @@
-package charge_your_vehicle.view.controllers;
+package charge_your_vehicle.view.servlets;
 
 import charge_your_vehicle.dao.ChargingPointDao;
 import charge_your_vehicle.dto.ChargingPointDto;
-import charge_your_vehicle.model.User;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.promoted.PromotedChargingPointsBean;
 import org.slf4j.Logger;

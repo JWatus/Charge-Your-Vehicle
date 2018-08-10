@@ -14,7 +14,7 @@ public class FileUploadProcessorBean extends UploadProcessor {
 
     public int uploadJsonFile() throws IOException {
 
-        File initialFile = new File("/home/jwatus/MY APPS/Charge-Your-Vehicle/src/main/resources/sample.json");
+        File initialFile = new File("src/main/resources/sample.json");
         InputStream fileContent = new FileInputStream(initialFile);
         String content = convertInputSteamToString(fileContent);
 

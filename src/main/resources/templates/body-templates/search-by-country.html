@@ -19,11 +19,12 @@
     <hr/>
 
     <div class="col-3">
-        <form method="get" action="/search-by-country">
+        <form action="#" th:action="@{/search-by-country}" th:object="${chargingPointDto}" method="post">
+        <!--<form method="get" action="/search-by-country">-->
             <fieldset>
                 <div class="form-group">
                     <label>Country</label>
-                    <input type="text" name="country" class="form-control" placeholder="Enter country">
+                    <input type="text" th:field="*{country}" class="form-control" placeholder="Enter country">
                 </div>
                 </br>
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -41,21 +41,21 @@ public class SearchByTownController {
         LOG.info("User searched charging station at town");
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
         modelAndView.addObject("title", "Search by town");
-        modelAndView.addObject("addressInfo", new AddressInfo());
+        modelAndView.addObject("chargingPointDto", new ChargingPointDto());
         return modelAndView;
     }
 
     @RequestMapping(value = "/search-by-town", method = RequestMethod.POST)
-    public ModelAndView getFindAllInTownResultPage(@ModelAttribute AddressInfo addressInfo) {
+    public ModelAndView getFindAllInTownResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
 
-        String town = addressInfo.getTown();
+        String town = chargingPointDto.getTown();
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
 
         if (town == null || town.isEmpty()) {
             return modelAndView;
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByAddressInfo_Town(town));
+                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByTown(town));
                 if (chargingPointsDtoList.size() > 0) {
 //                    townStatisticsDao.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results");

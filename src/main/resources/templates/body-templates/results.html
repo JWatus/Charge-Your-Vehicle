@@ -21,73 +21,51 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4" id="list-of-points">
-                <!--<#list chargingPoints?sort_by("promoted")?reverse>-->
                 <tr th:each="chargingPoint : ${chargingPoints}">
 
-                    <div th:if="${chargingPoint.promoted}!=null">
-                        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                            <div th:else>
-                                <div class="card border-primary mb-3" style="max-width: 20rem;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="card-header bg-success text-white border border-bottom-0 border-dark rounded-top ">
+                        <span th:utext=${chargingPoint.country}></span> -
+                        <span th:utext=${chargingPoint.town}></span>
+                    </h3>
+                    <div class="card-body border border-top-0 border-dark rounded-bottom ">
 
-                    <h3 class="card-header"><span th:utext=${chargingPoint.country}></span> - <span
-                            th:utext=${chargingPoint.town}></span></h3>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Latitude:</strong><span
-                                th:utext=${chargingPoint.latitudeString}></span>
+                        <p class="card-text">
+                            <strong>Latitude: </strong><span th:utext=${chargingPoint.latitudeString}></span>
                             <br/>
-                            <strong>Longitude:</strong><span th:utext=${chargingPoint.longitudeString}></span>
+                            <strong>Longitude: </strong><span th:utext=${chargingPoint.longitudeString}></span>
                         </p>
 
                         <h5>Address</h5>
                         <p class="card-text">
 
-                        <div th:if="${chargingPoint.title!=null}">
+                        <div th:if="${chargingPoint.title}">
                             <strong>Title:</strong>
                             <span th:utext=${chargingPoint.title}></span>
                             </br>
                         </div>
 
-                        <div th:if="${chargingPoint.addressLine1!=null}">
+                        <div th:if="${chargingPoint.addressLine1}">
                             <strong>Address:</strong>
                             <span th:utext=${chargingPoint.addressLine1}></span>
                             </br>
                         </div>
 
-                        <div th:if="${chargingPoint.addressLine2!=null}">
+                        <div th:if="${chargingPoint.addressLine2}">
                             <span th:utext=${chargingPoint.addressLine2}></span>
                             </br>
                         </div>
 
-                        <div th:if="${chargingPoint.postCode!=null}">
+                        <div th:if="${chargingPoint.postCode}">
                             <strong>Post code:</strong>
                             <span th:utext=${chargingPoint.postCode}></span>
                             </br>
                         </div>
 
-                        <div th:if="${chargingPoint.stateOrProvince!=null}">
+                        <div th:if="${chargingPoint.stateOrProvince}">
                             <strong>Region:</strong>
                             <span th:utext=${chargingPoint.stateOrProvince}></span></br>
                         </div>
 
-                        </p>
-
-                        <!--<#list chargingPoint.connections>-->
-                        <!--<h5>Connections</h5>-->
-                        <!--<p class="card-text">-->
-                        <!--<#items as connection>-->
-                        <!--<strong>Ord. : </strong>-->
-                        <!--${connection?counter}</br>-->
-
-
-                        <!--<strong>Description:</strong>-->
-                        <!--${connection.levelComments} </br>-->
-                        <!--<strong>Quantity:</strong>-->
-                        <!--${connection.quantity} </br>-->
-                        <!--</#items>-->
                         </p>
                     </div>
                 </tr>
@@ -97,11 +75,11 @@
     <div class="col-lg-8 col-sm-12">
         <!--<#include "/body-templates/points-map.ftlh">-->
     </div>
+
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
 </div>
 
-<!--FOOTER-->
-<div th:replace="/common/footer :: content"></div>
-</div>
 <!--SCRIPTS-->
 <div th:replace="/common/scripts :: content"></div>
 </body>

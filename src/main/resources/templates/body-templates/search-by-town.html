@@ -19,11 +19,12 @@
 <hr/>
 
 <div class="col-3">
-    <form method="get" action="/search-by-town">
+    <!--<form method="get" action="/search-by-town">-->
+    <form action="#" th:action="@{/search-by-town}" th:object="${addressInfo}" method="post">
         <fieldset>
             <div class="form-group">
                 <label>Town</label>
-                <input type="text" name="town" class="form-control" placeholder="Enter town">
+                <input type="text" th:field="*{town}" class="form-control" placeholder="Enter town">
             </div>
             </br>
             <button type="submit" class="btn btn-primary">Submit</button>

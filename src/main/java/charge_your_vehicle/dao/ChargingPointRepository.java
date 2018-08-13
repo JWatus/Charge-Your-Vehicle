@@ -12,5 +12,4 @@ public interface ChargingPointRepository extends JpaRepository<ChargingPoint, Lo
     List<ChargingPoint> findByAddressInfo_Town(String town);
 
     List<ChargingPoint> findByAddressInfo_Country(String country);
-
 }

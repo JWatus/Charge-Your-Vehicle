@@ -72,8 +72,7 @@ public class FindTheClosestController {
 
         if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
                 && (isDegreesLatiNull && isMinutesLatiNull && isSecondsLatiNull)) {
-            modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
-            modelAndView.addObject("title", "Find the closest charging point");
+            errorMessages(modelAndView);
         } else if ((isDegreesLongNull && isMinutesLongNull && isSecondsLongNull)
                 || (isDegreesLatiNull && isMinutesLatiNull && isSecondsLatiNull)) {
             errorMessages(modelAndView);
@@ -120,7 +119,7 @@ public class FindTheClosestController {
 
     private void errorMessages(ModelAndView modelAndView) {
         modelAndView.addObject("title", "Find the closest charging point");
-        modelAndView.addObject("error", "Please fill the form with correct value");
+        modelAndView.addObject("error", "Please fill all fields in the form with correct value");
     }
 
     private boolean isStringInRange(String value, int min, int max) {

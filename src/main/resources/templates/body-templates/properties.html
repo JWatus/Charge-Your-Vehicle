@@ -36,7 +36,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Google API Key</label>
+                        <label>Current Google API Key</label>
+                        <input type="text" class="form-control" th:value="${apiKey}" style="width:350px;">
+                        <br>
+                        <label>New Google API Key</label>
                         <input type="text" class="form-control" th:field="*{apiKey}" style="width:350px;">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -62,6 +62,9 @@ public class PropertiesController extends HttpServlet {
             appPropertiesBean.setGoogleApiKey(apiKey);
         }
 
+        modelAndView.addObject("apiKey", appPropertiesBean.getGoogleApiKey());
+        modelAndView.addObject("units", Formaters.getNames(Units.values()));
+        modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
         return modelAndView;
     }
 }

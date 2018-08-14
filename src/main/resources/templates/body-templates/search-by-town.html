@@ -17,9 +17,13 @@
 
 <h1>Find all charging points in town</h1>
 <hr/>
-
 <div class="col-3">
-    <!--<form method="get" action="/search-by-town">-->
+    <div th:if="${error!=null}">
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span th:utext=${error}></span>
+        </div>
+    </div>
     <form action="#" th:action="@{/search-by-town}" th:object="${chargingPointDto}" method="post">
         <fieldset>
             <div class="form-group">

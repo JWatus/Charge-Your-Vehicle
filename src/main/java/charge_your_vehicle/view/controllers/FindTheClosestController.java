@@ -97,7 +97,6 @@ public class FindTheClosestController {
                     List<ChargingPoint> chargingPointsList = new ArrayList<>();
                     ChargingPoint chargingPoint = dataFilter.findClosestChargingStation(chargingPointRepository.findAll(), longitude, latitude);
                     chargingPointsList.add(chargingPoint);
-//                    List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
                     List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);

@@ -101,11 +101,10 @@ public class FindTheClosestInRadiusController {
                         double longitude = coordinatesConverter.convertCoordinatesToDecimal(directionLong, degreesLong, minutesLong, secondsLong);
                         double latitude = coordinatesConverter.convertCoordinatesToDecimal(directionLati, degreesLati, minutesLati, secondsLati);
 
-                        List<ChargingPoint> chargingPointsList = dataFilter
-                                .findChargingStationAtArea(chargingPointRepository.findAll(), longitude,
-                                        latitude, radius);
-
+                        List<ChargingPoint> chargingPointsList = dataFilter.findChargingStationAtArea(
+                                chargingPointRepository.findAll(), longitude, latitude, radius);
                         List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
+
                         if (chargingPointsDtoList.size() > 0) {
                             modelAndView = new ModelAndView("body-templates/results");
                             modelAndView.addObject("chargingPoints", chargingPointsDtoList);

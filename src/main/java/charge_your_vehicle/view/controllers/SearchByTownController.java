@@ -3,7 +3,6 @@ package charge_your_vehicle.view.controllers;
 import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dao.TownStatisticsDao;
 import charge_your_vehicle.dto.ChargingPointDto;
-import charge_your_vehicle.model.AddressInfo;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;

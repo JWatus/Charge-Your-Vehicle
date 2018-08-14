@@ -51,6 +51,7 @@ public class SearchByTownController {
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
 
         if (town == null || town.isEmpty()) {
+            modelAndView.addObject("error", "Fill the field with correct value");
             return modelAndView;
         } else {
             try {

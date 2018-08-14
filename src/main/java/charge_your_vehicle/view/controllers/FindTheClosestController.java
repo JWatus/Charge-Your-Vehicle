@@ -119,7 +119,7 @@ public class FindTheClosestController {
 
     private void errorMessages(ModelAndView modelAndView) {
         modelAndView.addObject("title", "Find the closest charging point");
-        modelAndView.addObject("error", "Please fill all fields in the form with correct value");
+        modelAndView.addObject("error", "Please fill at least both degrees fields in the form with correct value");
     }
 
     private boolean isStringInRange(String value, int min, int max) {

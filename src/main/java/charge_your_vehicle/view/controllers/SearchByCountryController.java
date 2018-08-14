@@ -20,14 +20,13 @@ import java.util.List;
 public class SearchByCountryController extends HttpServlet {
 
     private ChargingPointRepository chargingPointRepository;
-    private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private CountryStatisticsDao countryStatisticsDao;
     private AppPropertiesBean appPropertiesBean;
 
     public SearchByCountryController(ChargingPointRepository chargingPointRepository,
+                                     CountryStatisticsDao countryStatisticsDao,
                                      AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
-        this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.countryStatisticsDao = countryStatisticsDao;
         this.appPropertiesBean = appPropertiesBean;
     }
@@ -50,6 +49,7 @@ public class SearchByCountryController extends HttpServlet {
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");
 
         if (country == null || country.isEmpty()) {
+            modelAndView.addObject("error", "Fill the field with correct value");
             return modelAndView;
         } else {
             try {

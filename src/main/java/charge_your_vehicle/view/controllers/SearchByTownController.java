@@ -1,7 +1,7 @@
 package charge_your_vehicle.view.controllers;
 
 import charge_your_vehicle.dao.ChargingPointRepository;
-import charge_your_vehicle.dao.TownStatisticsDao;
+import charge_your_vehicle.dao.TownStatisticsRepository;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
@@ -20,16 +20,16 @@ public class SearchByTownController {
 
     private ChargingPointRepository chargingPointRepository;
     private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
-    private TownStatisticsDao townStatisticsDao;
+    private TownStatisticsRepository townStatisticsRepository;
     private AppPropertiesBean appPropertiesBean;
 
     public SearchByTownController(ChargingPointRepository chargingPointRepository,
                                   ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
-                                  TownStatisticsDao townStatisticsDao,
+                                  TownStatisticsRepository townStatisticsRepository,
                                   AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
-        this.townStatisticsDao = townStatisticsDao;
+        this.townStatisticsRepository = townStatisticsRepository;
         this.appPropertiesBean = appPropertiesBean;
     }
 
@@ -57,7 +57,7 @@ public class SearchByTownController {
             try {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByTown(town));
                 if (chargingPointsDtoList.size() > 0) {
-//                    townStatisticsDao.addToStatistics(town);
+//                    townStatisticsRepository.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("title", "Search by town");

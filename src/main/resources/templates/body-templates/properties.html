@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <h1 th:utext="${title}"></h1>
+    <hr/>
+
+    <div class="col-12">
+        <form method="post" action="/administration/properties">
+            <fieldset>
+                <form action="#" th:action="@{/administration/properties}" th:object="${parametersDto}" method="post">
+                    <div class="form-group">
+                        <label for="unit">Units</label>
+                        <select class="form-control" id="unit" name="unit" style="width:150px;">
+                            <tr th:each="unit :${units}">
+                                <div th:if="${unit == current_unit}">
+                                    <option selected th:utext="${unit}"></option>
+                                </div>
+                                <div th:unless="${unit == current_unit}">
+                                    <option th:utext="${unit}"></option>
+                                </div>
+                            </tr>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Google API Key</label>
+                        <input type="text" class="form-control" th:field="*{apiKey}" style="width:350px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </fieldset>
+        </form>
+    </div>
+    </br>
+    </br>
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
+</div>
+
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>

@@ -2,17 +2,19 @@ package charge_your_vehicle.dao;
 
 import charge_your_vehicle.model.CountryStatistics;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class CountryStatisticsDao {
+@Transactional
+public class CountryStatisticsRepository {
 
     private EntityManager entityManager;
 
-    public CountryStatisticsDao(EntityManager entityManager) {
+    public CountryStatisticsRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

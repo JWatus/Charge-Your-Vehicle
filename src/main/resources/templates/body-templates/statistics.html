@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <h1 th:utext="${title}"></h1>
+    <hr/>
+
+    <div class="col-3">
+        <div th:if="${error!=null}">
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span th:utext=${error}></span>
+            </div>
+        </div>
+        <form method="post" action="/statistics?location=country">
+            <fieldset>
+                <button type="submit" class="btn btn-primary" th:utext=${location}>Show statistics for countries</button>
+            </fieldset>
+        </form>
+        </br>
+        <form method="post" action="/statistics?location=town">
+            <fieldset>
+                <button type="submit" class="btn btn-primary" th:utext=${location}>Show statistics for towns</button>
+            </fieldset>
+        </form>
+    </div>
+    </br>
+    </br>
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
+</div>
+
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>

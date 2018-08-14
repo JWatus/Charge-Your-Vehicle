@@ -1,9 +1,8 @@
 package charge_your_vehicle.view.controllers;
 
 import charge_your_vehicle.dao.ChargingPointRepository;
-import charge_your_vehicle.dao.CountryStatisticsDao;
+import charge_your_vehicle.dao.CountryStatisticsRepository;
 import charge_your_vehicle.dto.ChargingPointDto;
-import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +19,14 @@ import java.util.List;
 public class SearchByCountryController extends HttpServlet {
 
     private ChargingPointRepository chargingPointRepository;
-    private CountryStatisticsDao countryStatisticsDao;
+    private CountryStatisticsRepository countryStatisticsRepository;
     private AppPropertiesBean appPropertiesBean;
 
     public SearchByCountryController(ChargingPointRepository chargingPointRepository,
-                                     CountryStatisticsDao countryStatisticsDao,
+                                     CountryStatisticsRepository countryStatisticsRepository,
                                      AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
-        this.countryStatisticsDao = countryStatisticsDao;
+        this.countryStatisticsRepository = countryStatisticsRepository;
         this.appPropertiesBean = appPropertiesBean;
     }
 
@@ -55,7 +54,7 @@ public class SearchByCountryController extends HttpServlet {
             try {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByCountry(country));
                 if (chargingPointsDtoList.size() > 0) {
-//                    countryStatisticsDao.addToStatistics(country);
+//                    countryStatisticsRepository.addToStatistics(country);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("title", "Search by country");

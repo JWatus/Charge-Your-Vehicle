@@ -6,7 +6,6 @@ import charge_your_vehicle.dto.CoordinatesDto;
 import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.service.converters.CoordinatesConverter;
 import charge_your_vehicle.service.data_filters.DataFilter;
-import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.view.commons.Formaters;
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,18 +26,15 @@ public class FindTheClosestController {
     private ChargingPointRepository chargingPointRepository;
     private DataFilter dataFilter;
     private CoordinatesConverter coordinatesConverter;
-    private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private AppPropertiesBean appPropertiesBean;
 
     public FindTheClosestController(ChargingPointRepository chargingPointRepository,
                                     DataFilter dataFilter,
                                     CoordinatesConverter coordinatesConverter,
-                                    ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                     AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
         this.coordinatesConverter = coordinatesConverter;
-        this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.appPropertiesBean = appPropertiesBean;
     }
 

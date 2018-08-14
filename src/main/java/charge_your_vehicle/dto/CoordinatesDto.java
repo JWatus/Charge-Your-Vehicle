@@ -10,6 +10,15 @@ public class CoordinatesDto {
     private String degreesLati;
     private String minutesLati;
     private String secondsLati;
+    private String radius;
+
+    public String getRadius() {
+        return radius;
+    }
+
+    public void setRadius(String radius) {
+        this.radius = radius;
+    }
 
     public String getDirectionLong() {
         return directionLong;

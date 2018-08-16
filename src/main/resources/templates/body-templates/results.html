@@ -102,6 +102,9 @@
                     var middleLon = [[${chargingPoints[0].longitude}]];
                     var size = [[${chargingPointsSize}]];
 
+                    var latitude = [[${latitude}]];
+                    var longitude = [[${longitude}]];
+
                     if (size == 0) {
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
@@ -116,6 +119,17 @@
                                 zoom: 12,
                                 center: {lat: middleLat, lng: middleLon}
                             });
+
+                            if (latitude != null) {
+                                addMyMarker(map, latitude, longitude, {title: 'My position'});
+                            }
+
+                            for (var i = 0; i < size; i++) {
+                                var lat = [[${chargingPoints[i].latitude}]];
+                                var lon = [[${chargingPoints[i].longitude}]];
+                                var title = [[${chargingPoints[i].title}]];
+                                addMarker(map, lat, lon, {title: title});
+                            }
                         }
 
                     } else {
@@ -124,24 +138,20 @@
                                 zoom: 4,
                                 center: {lat: middleLat, lng: middleLon}
                             });
+
+                            if (latitude != null) {
+                                addMyMarker(map, latitude, longitude, {title: 'My position'});
+                            }
+
+                            for (var i = 0; i < size; i++) {
+                                var lat = [[${chargingPoints[i].latitude}]];
+                                var lon = [[${chargingPoints[i].longitude}]];
+                                var title = [[${chargingPoints[i].title}]];
+                                addMarker(map, lat, lon, {title: title});
+                            }
                         }
                     }
-
-                    //
-                    // <#elseif chargingPoints?size == 1>
-                    //         zoom: 12,
-                    //         center: {lat: ${chargingPoints[0].latitude},lng: ${chargingPoints[0].longitude}}}
-                    // );
-                    // <#else>
-                    // zoom: 4,
-                    //     center: {lat: ${chargingPoints[0].latitude},lng: ${chargingPoints[0].longitude}}}
-                    // );
-                    // </#if>
-                    //
-                    // <#if longitude??>
-                    // addMyMarker(map, ${latitude}, ${longitude}, {title: 'My position'});
-                    // </#if>
-                    //
+                    
                     // <#list chargingPoints>
                     // <#items as chargingPoint>
                     // addMarker(map, ${chargingPoint.latitude}, ${chargingPoint.longitude}, {title: '${chargingPoint.title}'});

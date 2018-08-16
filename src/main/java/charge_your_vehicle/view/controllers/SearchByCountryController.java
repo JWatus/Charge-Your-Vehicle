@@ -55,7 +55,7 @@ public class SearchByCountryController extends HttpServlet {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByCountry(country));
                 if (chargingPointsDtoList.size() > 0) {
 //                    countryStatisticsRepository.addToStatistics(country);
-                    modelAndView = new ModelAndView("body-templates/results");
+                    modelAndView = new ModelAndView("body-templates/results-town-and-country");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("title", "Search by country");

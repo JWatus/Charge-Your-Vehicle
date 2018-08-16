@@ -58,7 +58,7 @@ public class SearchByTownController {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByTown(town));
                 if (chargingPointsDtoList.size() > 0) {
 //                    townStatisticsRepository.addToStatistics(town);
-                    modelAndView = new ModelAndView("body-templates/results");
+                    modelAndView = new ModelAndView("body-templates/results-town-and-country");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("title", "Search by town");

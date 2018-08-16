@@ -102,9 +102,6 @@
                     var middleLon = [[${chargingPoints[0].longitude}]];
                     var size = [[${chargingPointsSize}]];
 
-                    var latitude = [[${latitude}]];
-                    var longitude = [[${longitude}]];
-
                     if (size == 0) {
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
@@ -119,10 +116,6 @@
                                 zoom: 12,
                                 center: {lat: middleLat, lng: middleLon}
                             });
-
-                            if (latitude != null) {
-                                addMyMarker(map, latitude, longitude, {title: 'My position'});
-                            }
                         }
 
                     } else {
@@ -131,17 +124,6 @@
                                 zoom: 4,
                                 center: {lat: middleLat, lng: middleLon}
                             });
-
-                            if (latitude != null) {
-                                addMyMarker(map, latitude, longitude, {title: 'My position'});
-                            }
-
-                            // for (var i = 0; i < size; i++) {
-                            //
-                            //     var ladt = [[${prev}]];
-                            //
-                            //     addMarker(map, ladt, lon, {title: title});
-                            // }
                         }
                     }
 

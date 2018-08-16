@@ -60,6 +60,7 @@ public class SearchByTownController {
 //                    townStatisticsRepository.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("title", "Search by town");
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                     return modelAndView;

@@ -57,6 +57,7 @@ public class SearchByCountryController extends HttpServlet {
 //                    countryStatisticsRepository.addToStatistics(country);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("title", "Search by country");
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                     return modelAndView;

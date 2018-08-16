@@ -85,6 +85,7 @@ public class FindTheClosestInRadiusByAddressController {
                 modelAndView = new ModelAndView("body-templates/results");
                 modelAndView.addObject("points-map", "results");
                 modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                 modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
             } else {
                 return modelAndView;

@@ -107,6 +107,7 @@ public class FindTheClosestInRadiusController {
                         if (chargingPointsDtoList.size() > 0) {
                             modelAndView = new ModelAndView("body-templates/results");
                             modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                            modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                             modelAndView.addObject("title", "Find all charging points in radius");
                             modelAndView.addObject("latitude", latitude);
                             modelAndView.addObject("longitude", longitude);

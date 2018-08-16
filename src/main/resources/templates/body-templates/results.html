@@ -98,13 +98,35 @@
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
                     }
 
-                    // function initMap() {
-                    //     map = new google.maps.Map(document.getElementById('map'), {
-                    //
-                    //         <#if chargingPoints?size == 0>
-                    //         zoom: 3,
-                    //         center: {lat: 0, lng: 0}
-                    // });
+                    var middleLat = [[${chargingPoints[0].latitude}]];
+                    var middleLon = [[${chargingPoints[0].longitude}]];
+                    var size = [[${chargingPointsSize}]];
+
+                    if (size == 0) {
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 3,
+                                center: {lat: 0, lng: 0}
+                            });
+                        }
+
+                    } else if (size == 1) {
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 12,
+                                center: {lat: middleLat, lng: middleLon}
+                            });
+                        }
+
+                    } else {
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 4,
+                                center: {lat: middleLat, lng: middleLon}
+                            });
+                        }
+                    }
+
                     //
                     // <#elseif chargingPoints?size == 1>
                     //         zoom: 12,
@@ -125,7 +147,7 @@
                     // addMarker(map, ${chargingPoint.latitude}, ${chargingPoint.longitude}, {title: '${chargingPoint.title}'});
                     // </#items>
                     // </#list>
-                    // }
+
                 </script>
 
                 <script async defer

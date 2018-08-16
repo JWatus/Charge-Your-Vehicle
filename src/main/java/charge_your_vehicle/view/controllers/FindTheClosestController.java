@@ -99,6 +99,7 @@ public class FindTheClosestController {
                     List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
                     modelAndView = new ModelAndView("body-templates/results");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("title", "Find the closest charging point");
                     modelAndView.addObject("latitude", latitude);
                     modelAndView.addObject("longitude", longitude);

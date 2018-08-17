@@ -123,8 +123,7 @@
 
                 </script>
 
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBNbLWwABk4GKoE3S0Y15APuBjY0jiQLc&callback=initMap">
+                <script async defer th:src="@{https://maps.googleapis.com/maps/api/js(key=${google_api_key})&callback=initMap}">
                 </script>
             </div>
         </div>

@@ -116,6 +116,7 @@
                                 zoom: 12,
                                 center: {lat: middleLat, lng: middleLon}
                             });
+                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
                         }
 
                     } else {
@@ -124,12 +125,17 @@
                                 zoom: 4,
                                 center: {lat: middleLat, lng: middleLon}
                             });
+
+                            //  points.forEach(function() {
+                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
+                            // });
                         }
                     }
+
                 </script>
 
                 <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBNbLWwABk4GKoE3S0Y15APuBjY0jiQLc&callback=initMap">
                 </script>
             </div>
         </div>

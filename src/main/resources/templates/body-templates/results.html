@@ -123,6 +123,7 @@
                             if (latitude != null) {
                                 addMyMarker(map, latitude, longitude, {title: 'My position'});
                             }
+                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
                         }
 
                     } else {
@@ -135,12 +136,13 @@
                             if (latitude != null) {
                                 addMyMarker(map, latitude, longitude, {title: 'My position'});
                             }
+                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
                         }
                     }
                 </script>
 
                 <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBNbLWwABk4GKoE3S0Y15APuBjY0jiQLc&callback=initMap">
                 </script>
             </div>
         </div>

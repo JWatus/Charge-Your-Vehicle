@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <h1 th:utext="${title}"></h1>
+    <hr/>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" id="list-of-points">
+                <tr th:each="location : ${locationList}">
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+
+                    <h3 class="card-header" th:text="${location.name}"></h3>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Number of visits:</strong> <span th:text="${location.numberOfVisits}"></span></p>
+                    </div>
+                </div>
+                </tr>
+    </div>
+</div>
+</div>
+</br>
+</br>
+<!--FOOTER-->
+<div th:replace="/common/footer :: content"></div>
+</div>
+
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>
+

@@ -1,6 +1,7 @@
 package charge_your_vehicle.view.controllers;
 
 import charge_your_vehicle.dao.ChargingPointRepository;
+import charge_your_vehicle.dto.AddressDto;
 import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.model.Coordinates;
@@ -13,6 +14,7 @@ import charge_your_vehicle.view.commons.Formaters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,15 +49,21 @@ public class FindTheClosestInRadiusByAddressController {
     public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusByAddressController.class);
 
     @RequestMapping(value = "/find-the-closest-in-radius-by-address", method = RequestMethod.GET)
-    public ModelAndView getFindTheClosestPage(HttpSession session) {
-
+    public ModelAndView getFindTheClosestInRadiusByAddressFormPage(HttpSession session) {
         LOG.info("User searched charging station at the area");
-
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius-by-address");
         modelAndView.addObject("title", "Find all charging points in radius by address");
+        modelAndView.addObject("addressDto", new AddressDto());
+        return modelAndView;
+    }
 
-        String radiusString = (String) session.getAttribute("radius");
-        String address = (String) session.getAttribute("address");
+    @RequestMapping(value = "/find-the-closest-in-radius-by-address", method = RequestMethod.POST)
+    public ModelAndView getFindTheClosestInRadiusByAddressResultPage(@ModelAttribute AddressDto addressDto) {
+
+        ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius-by-address");
+
+        String radiusString = addressDto.getRadius();
+        String address = addressDto.getAddress();
 
         boolean isRadiusStringNull = (radiusString == null || radiusString.isEmpty());
         boolean isRadiusCorrect = false;
@@ -65,6 +73,7 @@ public class FindTheClosestInRadiusByAddressController {
         }
         if (address == null || address.isEmpty()) {
             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+            modelAndView.addObject("error", "Address can't be empty");
             return modelAndView;
         } else if (!isRadiusCorrect) {
             modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
@@ -88,6 +97,7 @@ public class FindTheClosestInRadiusByAddressController {
                 modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                 modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
             } else {
+                modelAndView.addObject("error", "Google converter couldn't get coordinates from this address");
                 return modelAndView;
             }
         }

@@ -1,4 +1,4 @@
-package charge_your_vehicle.view.controllers;
+package charge_your_vehicle.view.servlets;
 
 import charge_your_vehicle.dao.CountryStatisticsRepository;
 import charge_your_vehicle.dao.TownStatisticsRepository;
@@ -47,19 +47,17 @@ public class StatisticsController extends HttpServlet {
         if (location.equals("town")) {
             List locationList = townStatisticsRepository.findAllOrderByNumberOfVisitsDesc();
             if (locationList.size() == 0) {
-                modelAndView.addObject("body_template", "statistics");
                 modelAndView.addObject("error", "Noone was searching charging points by town name");
             } else {
-                modelAndView.addObject("body_template", "show-statistics");
+                modelAndView = new ModelAndView("body-templates/show-statistics");
                 modelAndView.addObject("locationList", locationList);
             }
         } else if (location.equals("country")) {
             List locationList = countryStatisticsRepository.findAllOrderByNumberOfVisitsDesc();
             if (locationList.size() == 0) {
-                modelAndView.addObject("body_template", "statistics");
                 modelAndView.addObject("error", "Noone was searching charging points by country name");
             } else {
-                modelAndView.addObject("body_template", "show-statistics");
+                modelAndView = new ModelAndView("body-templates/show-statistics");
                 modelAndView.addObject("locationList", locationList);
             }
         }

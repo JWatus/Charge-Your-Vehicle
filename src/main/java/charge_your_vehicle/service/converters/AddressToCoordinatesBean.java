@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 @Service
 public class AddressToCoordinatesBean {
-    public static final String API_URL = "https://maps.googleapis.com/maps/api/geocode/json";
+    private static final String API_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 
     public Coordinates getCoordinates(String address) {
         try {

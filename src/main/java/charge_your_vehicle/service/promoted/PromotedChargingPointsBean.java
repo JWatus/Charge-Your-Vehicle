@@ -1,20 +1,21 @@
 package charge_your_vehicle.service.promoted;
 
-import charge_your_vehicle.dao.PromotedChargingPointDao;
+import charge_your_vehicle.dao.PromotedChargingPointRepository;
 import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.model.PromotedChargingPoint;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Named;
+import java.util.Optional;
 
 @Service
 @Named
 public class PromotedChargingPointsBean {
 
-    private PromotedChargingPointDao promotedChargingPointDao;
+    private PromotedChargingPointRepository promotedChargingPointRepository;
 
-    public PromotedChargingPointsBean(PromotedChargingPointDao promotedChargingPointDao) {
-        this.promotedChargingPointDao = promotedChargingPointDao;
+    public PromotedChargingPointsBean(PromotedChargingPointRepository promotedChargingPointRepository) {
+        this.promotedChargingPointRepository = promotedChargingPointRepository;
     }
 
     public PromotedChargingPointsBean() {
@@ -25,10 +26,8 @@ public class PromotedChargingPointsBean {
     }
 
     public boolean isPromoted(int chargingPointId) {
-
-        PromotedChargingPoint promotedChargingPoint = promotedChargingPointDao.findById(chargingPointId);
-
-        return promotedChargingPoint != null;
+        Optional<PromotedChargingPoint> promotedChargingPoint = promotedChargingPointRepository.findById(Long.valueOf(chargingPointId));
+        return promotedChargingPoint.isPresent();
     }
 
     public void addToPromoted(ChargingPoint chargingPoint) {
@@ -40,7 +39,7 @@ public class PromotedChargingPointsBean {
     }
 
     private void addToPromoted(PromotedChargingPoint promotedChargingPoint) {
-        promotedChargingPointDao.save(promotedChargingPoint);
+        promotedChargingPointRepository.save(promotedChargingPoint);
     }
 
     public void removeFromPromoted(ChargingPoint chargingPoint) {
@@ -48,6 +47,7 @@ public class PromotedChargingPointsBean {
     }
 
     public void removeFromPromoted(int chargingPointId) {
-        promotedChargingPointDao.delete(chargingPointId);
+        Optional<PromotedChargingPoint> promotedChargingPoint = promotedChargingPointRepository.findById(Long.valueOf(chargingPointId));
+        promotedChargingPointRepository.delete(promotedChargingPoint.get());
     }
 }

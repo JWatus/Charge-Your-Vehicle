@@ -84,13 +84,6 @@
 
                 <script>
 
-                    function addMyMarker(mapa, lat, lon, markerOptions) {
-                        markerOptions.position = new google.maps.LatLng(lat, lon);
-                        markerOptions.map = mapa;
-                        var marker = new google.maps.Marker(markerOptions);
-                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-                    }
-
                     function addMarker(mapa, lat, lon, markerOptions) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
                         markerOptions.map = mapa;
@@ -125,10 +118,6 @@
                                 zoom: 4,
                                 center: {lat: middleLat, lng: middleLon}
                             });
-
-                            //  points.forEach(function() {
-                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
-                            // });
                         }
                     }
 

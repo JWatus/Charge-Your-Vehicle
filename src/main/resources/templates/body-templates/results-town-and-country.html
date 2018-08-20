@@ -85,11 +85,7 @@
 
                 <script th:inline="javascript">
 
-                    /*<![CDATA[*/
 
-                        var points = [[${chargingPoints}]];
-
-                    /*]]>*/
 
                     function addMarker(mapa, lat, lon, markerOptions) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
@@ -126,6 +122,13 @@
                                 center: {lat: middleLat, lng: middleLon}
                             });
 
+                        /*<![CDATA[*/
+
+                        var points = [[${chargingPoints}]];
+                        for (i = 0; i < points.length; i++) {
+
+                         }
+                        /*]]>*/
 
                         }
                     }

@@ -82,7 +82,7 @@
                     var map;
                 </script>
 
-                <script>
+                <script th:inline="javascript">
 
                     function addMyMarker(mapa, lat, lon, markerOptions) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
@@ -136,7 +136,20 @@
                             if (latitude != null) {
                                 addMyMarker(map, latitude, longitude, {title: 'My position'});
                             }
-                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
+
+                             /*<![CDATA[*/
+
+                                var points = [[${chargingPoints}]];
+                                var lati;
+                                var longi;
+                                var title;
+                                for (i = 0; i < points.length; i++) {
+                                    lati = points[i].latitude;
+                                    longi = points[i].longitude;
+                                    title = points[i].title;
+                                    addMarker(map, lati, longi, {title: title});
+                                }
+                            /*]]>*/
                         }
                     }
                 </script>

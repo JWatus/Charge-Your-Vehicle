@@ -1,7 +1,7 @@
 logging:
   level:
     ROOT: INFO
-    pl.sii.eu.micuenta: INFO
+    charge_your_vehicle: INFO
     org.springframework.test: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

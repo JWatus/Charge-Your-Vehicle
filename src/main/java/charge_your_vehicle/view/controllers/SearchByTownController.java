@@ -3,7 +3,6 @@ package charge_your_vehicle.view.controllers;
 import charge_your_vehicle.dao.ChargingPointRepository;
 import charge_your_vehicle.dao.TownStatisticsRepository;
 import charge_your_vehicle.dto.ChargingPointDto;
-import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,16 +18,13 @@ import java.util.List;
 public class SearchByTownController {
 
     private ChargingPointRepository chargingPointRepository;
-    private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private TownStatisticsRepository townStatisticsRepository;
     private AppPropertiesBean appPropertiesBean;
 
     public SearchByTownController(ChargingPointRepository chargingPointRepository,
-                                  ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                   TownStatisticsRepository townStatisticsRepository,
                                   AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
-        this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.townStatisticsRepository = townStatisticsRepository;
         this.appPropertiesBean = appPropertiesBean;
     }

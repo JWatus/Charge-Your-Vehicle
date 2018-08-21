@@ -8,7 +8,6 @@ import charge_your_vehicle.model.Coordinates;
 import charge_your_vehicle.service.converters.AddressToCoordinatesBean;
 import charge_your_vehicle.service.converters.CoordinatesConverter;
 import charge_your_vehicle.service.data_filters.DataFilter;
-import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.view.commons.Formaters;
 import org.slf4j.Logger;
@@ -29,20 +28,17 @@ public class FindTheClosestInRadiusByAddressController {
     private DataFilter dataFilter;
     private CoordinatesConverter coordinatesConverter;
     private AppPropertiesBean appPropertiesBean;
-    private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private AddressToCoordinatesBean addressToCoordinatesBean;
 
     public FindTheClosestInRadiusByAddressController(ChargingPointRepository chargingPointRepository,
                                                      DataFilter dataFilter,
                                                      CoordinatesConverter coordinatesConverter,
                                                      AppPropertiesBean appPropertiesBean,
-                                                     ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                                      AddressToCoordinatesBean addressToCoordinatesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
         this.coordinatesConverter = coordinatesConverter;
         this.appPropertiesBean = appPropertiesBean;
-        this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.addressToCoordinatesBean = addressToCoordinatesBean;
     }
 
@@ -90,7 +86,7 @@ public class FindTheClosestInRadiusByAddressController {
                         .findChargingStationAtArea(chargingPointRepository.findAll(), longitude,
                                 latitude, radius);
 
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
+                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
                 modelAndView = new ModelAndView("body-templates/results");
                 modelAndView.addObject("points-map", "results");
                 modelAndView.addObject("chargingPoints", chargingPointsDtoList);

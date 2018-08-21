@@ -7,7 +7,6 @@ import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.model.Coordinates;
 import charge_your_vehicle.service.converters.AddressToCoordinatesBean;
 import charge_your_vehicle.service.data_filters.DataFilter;
-import charge_your_vehicle.service.promoted.ChargingPointToDtoConverterBean;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,18 +24,15 @@ public class FindTheClosestByAddressController {
 
     private ChargingPointRepository chargingPointRepository;
     private DataFilter dataFilter;
-    private ChargingPointToDtoConverterBean chargingPointToDtoConverterBean;
     private AddressToCoordinatesBean addressToCoordinatesBean;
     private AppPropertiesBean appPropertiesBean;
 
     public FindTheClosestByAddressController(ChargingPointRepository chargingPointRepository,
                                              DataFilter dataFilter,
-                                             ChargingPointToDtoConverterBean chargingPointToDtoConverterBean,
                                              AddressToCoordinatesBean addressToCoordinatesBean,
                                              AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
-        this.chargingPointToDtoConverterBean = chargingPointToDtoConverterBean;
         this.addressToCoordinatesBean = addressToCoordinatesBean;
         this.appPropertiesBean = appPropertiesBean;
     }
@@ -73,7 +68,7 @@ public class FindTheClosestByAddressController {
 
                 ChargingPoint chargingPoint = dataFilter.findClosestChargingStation(chargingPointRepository.findAll(), longitude, latitude);
                 chargingPointsList.add(chargingPoint);
-                List<ChargingPointDto> chargingPointsDtoList = chargingPointToDtoConverterBean.convertList(chargingPointsList);
+                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
 
                 modelAndView = new ModelAndView("body-templates/results");
                 modelAndView.addObject("chargingPoints", chargingPointsDtoList);

@@ -31,7 +31,7 @@
 
                         <p class="card-text">
                             <strong>Latitude: </strong><span th:utext=${chargingPoint.latitudeString}></span>
-                            <br/>
+                            <br>
                             <strong>Longitude: </strong><span th:utext=${chargingPoint.longitudeString}></span>
                         </p>
 
@@ -41,24 +41,24 @@
                         <div th:if="${chargingPoint.title}">
                             <strong>Title:</strong>
                             <span th:utext=${chargingPoint.title}></span>
-                            </br>
+                            <br>
                         </div>
 
                         <div th:if="${chargingPoint.addressLine1}">
                             <strong>Address:</strong>
                             <span th:utext=${chargingPoint.addressLine1}></span>
-                            </br>
+                            <br>
                         </div>
 
                         <div th:if="${chargingPoint.addressLine2}">
                             <span th:utext=${chargingPoint.addressLine2}></span>
-                            </br>
+                            <br>
                         </div>
 
                         <div th:if="${chargingPoint.postCode}">
                             <strong>Post code:</strong>
                             <span th:utext=${chargingPoint.postCode}></span>
-                            </br>
+                            <br>
                         </div>
 
                         <div th:if="${chargingPoint.stateOrProvince}">

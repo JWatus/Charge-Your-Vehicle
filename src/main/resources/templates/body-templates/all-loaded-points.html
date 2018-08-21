@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+
+    <h1>Promoted charging points settings</h1>
+    <hr/>
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <th scope="col">Country</th>
+            <th scope="col">Town</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            </thead>
+            <tr th:each="chargingPoint : ${chargingPoints}">
+                <td th:utext=${chargingPoint.country}></td>
+                <td th:utext=${chargingPoint.town}></td>
+                <td th:utext=${chargingPoint.latitudeString}></td>
+                <td th:utext=${chargingPoint.longitudeString}></td>
+            </tr>
+        </table>
+    </div>
+
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
+</div>
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>
+
+
+
+

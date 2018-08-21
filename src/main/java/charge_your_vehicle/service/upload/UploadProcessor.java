@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UploadProcessor {
+class UploadProcessor {
 
     @Autowired
     private LevelRepository levelRepository;
@@ -36,32 +36,6 @@ public class UploadProcessor {
             }
         });
         addressInfos.forEach(c -> addressInfoRepository.save(c));
-
-        Set<Level> levels = new HashSet<>();
-        try {
-            chargingPointList.forEach(c -> c.getConnectionList().forEach(n -> {
-
-                if (!levels.stream().anyMatch(a -> a.getId() == n.getLevel().getId())) {
-                    System.out.println("#X " + n.getLevel().getId());
-                    levels.add(n.getLevel());
-                }
-            }));
-        } catch (Exception x) {
-            x.printStackTrace();
-        }
-        levels.forEach(c -> System.out.println(c.getId()));
-        levels.forEach(c -> levelRepository.save(c));
-
-        Set<Connection> connections = new HashSet<>();
-        chargingPointList.forEach(c -> c.getConnectionList().forEach(n -> {
-            if (!connections.stream().anyMatch(a -> a.getId() == n.getId())) {
-                n.setChargingPoint(null); // TODO
-                connections.add(n);
-            }
-        }));
-        connections.forEach(c -> {
-            if (c.getLevel() != null) connectionRepository.save(c);
-        });
 
         Set<ChargingPoint> chargingPoints = new HashSet<>();
         chargingPointList.forEach(c -> {

@@ -19,13 +19,16 @@ public class ApiUploadProcessorBean extends UploadProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUploadProcessorBean.class);
 
-    public int uploadAllChargingpointsFromApi() {
+    public int uploadAllChargingPointsFromApi() {
         return uploadJsonApi(downloadJsonAsStringFromApi("maxresults=1000000"));
-
     }
 
-    public int uploadAllChargingpointsInIndiaFromApi() {
+    public int uploadAllChargingPointsInIndiaFromApi() {
         return uploadJsonApi(downloadJsonAsStringFromApi("countrycode=IN&maxresults=1000000"));
+    }
+
+    public int uploadAllChargingPointsInPolandFromApi() {
+        return uploadJsonApi(downloadJsonAsStringFromApi("countrycode=PL&maxresults=1000000"));
     }
 
     private int uploadJsonApi(String Json) {

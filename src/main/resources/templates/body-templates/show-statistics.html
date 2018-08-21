@@ -15,29 +15,27 @@
 <!--BODY-->
 <div class="container body-content">
 
-    <h1 th:utext="${title}"></h1>
+    <h1>Statistics of chosen locations</h1>
     <hr/>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4" id="list-of-points">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                <th scope="col">Location</th>
+                <th scope="col">Number of search</th>
+                </thead>
                 <tr th:each="location : ${locationList}">
-
-                <div class="card border-primary mb-3" style="max-width: 20rem;">
-
-                    <h3 class="card-header" th:text="${location.name}"></h3>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Number of visits:</strong> <span th:text="${location.numberOfVisits}"></span></p>
-                    </div>
-                </div>
+                    <td th:utext=${location.name}></td>
+                    <td th:utext=${location.numberOfVisits}></td>
                 </tr>
+            </table>
+        </div>
     </div>
-</div>
-</div>
-</br>
-</br>
-<!--FOOTER-->
-<div th:replace="/common/footer :: content"></div>
+    </br>
+    </br>
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
 </div>
 
 <!--SCRIPTS-->

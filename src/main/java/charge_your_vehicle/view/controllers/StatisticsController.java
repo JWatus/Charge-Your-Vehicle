@@ -1,4 +1,4 @@
-package charge_your_vehicle.view.servlets;
+package charge_your_vehicle.view.controllers;
 
 import charge_your_vehicle.dao.CountryStatisticsRepository;
 import charge_your_vehicle.dao.TownStatisticsRepository;
@@ -30,7 +30,6 @@ public class StatisticsController extends HttpServlet {
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public ModelAndView getStatisticsPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/statistics");
-        modelAndView.addObject("body_template", "statistics");
         modelAndView.addObject("title", "Statistics");
         modelAndView.addObject("statisticsDto", new StatisticsDto());
         return modelAndView;
@@ -40,7 +39,6 @@ public class StatisticsController extends HttpServlet {
     public ModelAndView getStatisticsResultPage(@ModelAttribute StatisticsDto statisticsDto) {
 
         String location = statisticsDto.getLocation();
-
         ModelAndView modelAndView = new ModelAndView("body-templates/statistics");
         modelAndView.addObject("title", "Statistics");
 
@@ -61,7 +59,6 @@ public class StatisticsController extends HttpServlet {
                 modelAndView.addObject("locationList", locationList);
             }
         }
-
         return modelAndView;
     }
 }

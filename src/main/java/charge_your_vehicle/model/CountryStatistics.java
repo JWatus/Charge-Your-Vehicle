@@ -1,9 +1,6 @@
 package charge_your_vehicle.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "COUNTRY_STATISTICS")
@@ -13,7 +10,7 @@ public class CountryStatistics {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "numberOfVisits")
+    @Column(name = "number_of_visits")
     private Long numberOfVisits;
 
     public CountryStatistics() {

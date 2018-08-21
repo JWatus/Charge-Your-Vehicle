@@ -32,7 +32,6 @@ public class TownStatisticsRepository {
 
     public List<TownStatistics> findAll() {
         final Query query = entityManager.createQuery("SELECT ts FROM TownStatistics ts");
-
         return query.getResultList();
     }
 
@@ -43,17 +42,15 @@ public class TownStatisticsRepository {
 
     public List<TownStatistics> findMostChecked() {
         final Query query = entityManager.createQuery("SELECT ts FROM TownStatistics ts WHERE numberOfVisits=(SELECT max(numberOfVisits) FROM TownStatistics)");
-
         return query.getResultList();
     }
 
     public void addToStatistics(String town) {
         final Query query = entityManager.createNativeQuery(
-                "INSERT INTO TOWN_STATISTICS (name, numberOfVisits) " +
-                        "VALUES(:town, 1 ) ON DUPLICATE KEY UPDATE " +
-                        "numberOfVisits = numberOfVisits +1");
+                "INSERT INTO TOWN_STATISTICS (name, number_of_visits) " +
+                        "VALUES(:town, 1 ) " ); // +
+                   //    "ON DUPLICATE KEY UPDATE number_of_visits = number_of_visits + 1");
         query.setParameter("town", town.toUpperCase());
         query.executeUpdate();
-        return;
     }
 }

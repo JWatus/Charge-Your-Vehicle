@@ -18,21 +18,12 @@ public class TownStatisticsRepository {
         this.entityManager = entityManager;
     }
 
-    public void save(TownStatistics city) {
-        entityManager.persist(city);
-    }
-
-    public TownStatistics update(TownStatistics c) {
-        return entityManager.merge(c);
+    public void save(TownStatistics town) {
+        entityManager.persist(town);
     }
 
     public TownStatistics findByName(String city) {
         return entityManager.find(TownStatistics.class, city);
-    }
-
-    public List<TownStatistics> findAll() {
-        final Query query = entityManager.createQuery("SELECT ts FROM TownStatistics ts");
-        return query.getResultList();
     }
 
     public List<TownStatistics> findAllOrderByNumberOfVisitsDesc() {
@@ -40,17 +31,13 @@ public class TownStatisticsRepository {
         return query.getResultList();
     }
 
-    public List<TownStatistics> findMostChecked() {
-        final Query query = entityManager.createQuery("SELECT ts FROM TownStatistics ts WHERE numberOfVisits=(SELECT max(numberOfVisits) FROM TownStatistics)");
-        return query.getResultList();
-    }
-
     public void addToStatistics(String town) {
-        final Query query = entityManager.createNativeQuery(
-                "INSERT INTO TOWN_STATISTICS (name, number_of_visits) " +
-                        "VALUES(:town, 1 ) " ); // +
-                   //    "ON DUPLICATE KEY UPDATE number_of_visits = number_of_visits + 1");
-        query.setParameter("town", town.toUpperCase());
-        query.executeUpdate();
+        TownStatistics townStatistics = findByName(town);
+        if (townStatistics != null) {
+            Long currentNumberOfVisits = townStatistics.getNumberOfVisits();
+            townStatistics.setNumberOfVisits(currentNumberOfVisits + 1);
+        } else {
+            save(new TownStatistics(town, 1L));
+        }
     }
 }

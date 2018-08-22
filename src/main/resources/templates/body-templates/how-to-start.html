@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--METAINF-->
+    <div th:replace="/common/metainf :: content"></div>
+    <!--STYLES-->
+    <div th:replace="/common/style :: content"></div>
+    <!--TITLE-->
+    <title th:utext="${title}"></title>
+</head>
+<!--NAVBAR-->
+<body style="padding-top: 70px;">
+<div th:replace="/common/navbar :: content"></div>
+
+<!--BODY-->
+<div class="container body-content">
+    <h1>How to start?</h1>
+    <hr/>
+    <div class="col-9">
+        <p>Beneath are described few steps to start and options which You can find in this application.</p>
+
+        <h3>Setting properties</h3>
+        <p>
+            '<strong><span style="color:limegreen">Properties</span></strong>' section You can find in the
+            '<strong><span style="color:darkorange">Administration</span></strong>' panel. You can
+            set there the unit in which range for search charging points will be taken. Available options are: miles,
+            kilometers and meters.
+            <br><br>
+            If You want to be sure that Google Map will be properly displayed You should set Your own Google API key
+            beneath unit set field. Without it there is a possibility that map with markers of charging points will not
+            be displayed.
+            <br>
+        </p>
+
+        <h3>Data loading</h3>
+        <p>
+            If You want to use this app You need to load data to database. There are few ways to do this in
+            '<strong><span style="color:darkorange">Administration</span></strong>' panel.
+            <br>
+            <br>
+            If Your interests are only about checking functionality you can load few example charging points from file
+            in
+            '<strong><span style="color:limegreen">Load example charging points</span></strong>'. This is the
+            fastest way to begin using this application.
+            <br>
+            Eventually You can
+            '<strong><span style="color:limegreen">Load charging points from API</span></strong>'
+            - there are possibilities to load all charging points for
+            <strong><span style="color:dodgerblue">Poland</span></strong>
+            or
+            <strong><span style="color:dodgerblue">India</span></strong>.
+            It might take a little more time depending on the internet speed.
+            <br>
+            <br>
+            Last option is
+            '<strong><span style="color:dodgerblue">Load all charging points in the world</span></strong>'
+            - I do not recommend to do this unless You want to have fully functional application for every place in the
+            world. In this case loading all data will take a lot of time so be careful.
+            <br>
+            <br>
+            You can check all loaded charging points in '<strong><span style="color:limegreen">All loaded points</span></strong>'
+            section.
+            <br>
+        </p>
+
+        <h3>Usage of application</h3>
+        <p>
+            In '<strong><span style="color:darkorange">Search</span></strong>' panel there are various options of finding charging points.
+            You can search charging point which is closest to user's current location, all points in given radius,
+            nearest point to specific address, all points in radius from specific address, all points in town and all in country.
+            <br>
+            <br>
+            In '<strong><span style="color:darkorange">Statistics</span></strong>' panel there is possibility to check how many times
+            charging points were searched for specific towns or countries.
+        </p>
+    </div>
+    <br>
+    <!--FOOTER-->
+    <div th:replace="/common/footer :: content"></div>
+</div>
+<!--SCRIPTS-->
+<div th:replace="/common/scripts :: content"></div>
+</body>
+</html>

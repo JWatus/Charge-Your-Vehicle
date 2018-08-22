@@ -15,14 +15,21 @@
 <!--BODY-->
 <div class="container body-content">
 
-    <div>
-        <h1 class="display-4">Welcome to "Charge Your Vehicle" App!</h1>
-        <hr class="my-4">
-        <p class="lead">It's an application which searches charging points in the indicated area. </p>
-        <img src="cp1.png" alt="Electric car image" width="50%">
-        </br>
-        </br>
+    <h1 class="display-4">Welcome to "Charge Your Vehicle" App!</h1>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <p class="lead">It's an application which search for charging points in the indicated area. </p>
+            <p class="lead">More about functionalities and technologies used here You can read in
+                '<a href="/about" class="text-success">About</a>' section.
+            </p>
+        </div>
+        <div class="col-lg-8">
+            <img src="cp1.png" alt="Electric car image" width="100%">
+        </div>
     </div>
+    </br>
+    </br>
 
     <!--FOOTER-->
     <div th:replace="/common/footer :: content"></div>

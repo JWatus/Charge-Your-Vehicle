@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class DataFromApiOptionsController {
 
     @RequestMapping(value = "/administration/load-data-options", method = RequestMethod.GET)
-    public ModelAndView loadDataFromApiOptions() {
+    public ModelAndView loadDataFromApiOptionsPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/load-data-options");
         modelAndView.addObject("title", "Administration");
         return modelAndView;

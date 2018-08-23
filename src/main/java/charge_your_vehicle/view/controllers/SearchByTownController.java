@@ -32,7 +32,7 @@ public class SearchByTownController {
     public static final Logger LOG = LoggerFactory.getLogger(SearchByTownController.class);
 
     @RequestMapping(value = "/search-by-town", method = RequestMethod.GET)
-    public ModelAndView getFindAllInTownFormPage() {
+    public ModelAndView getSearchByTownFormPage() {
         LOG.info("User searched charging station at town");
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
         modelAndView.addObject("title", "Search by town");
@@ -41,7 +41,7 @@ public class SearchByTownController {
     }
 
     @RequestMapping(value = "/search-by-town", method = RequestMethod.POST)
-    public ModelAndView getFindAllInTownResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
+    public ModelAndView getSearchByTownResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
 
         String town = chargingPointDto.getTown();
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");

@@ -6,7 +6,6 @@ import charge_your_vehicle.dto.ChargingPointDto;
 import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.model.Coordinates;
 import charge_your_vehicle.service.converters.AddressToCoordinatesBean;
-import charge_your_vehicle.service.converters.CoordinatesConverter;
 import charge_your_vehicle.service.data_filters.DataFilter;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.view.commons.Formaters;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,18 +24,15 @@ public class FindTheClosestInRadiusByAddressController {
 
     private ChargingPointRepository chargingPointRepository;
     private DataFilter dataFilter;
-    private CoordinatesConverter coordinatesConverter;
     private AppPropertiesBean appPropertiesBean;
     private AddressToCoordinatesBean addressToCoordinatesBean;
 
     public FindTheClosestInRadiusByAddressController(ChargingPointRepository chargingPointRepository,
                                                      DataFilter dataFilter,
-                                                     CoordinatesConverter coordinatesConverter,
                                                      AppPropertiesBean appPropertiesBean,
                                                      AddressToCoordinatesBean addressToCoordinatesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
-        this.coordinatesConverter = coordinatesConverter;
         this.appPropertiesBean = appPropertiesBean;
         this.addressToCoordinatesBean = addressToCoordinatesBean;
     }
@@ -45,7 +40,7 @@ public class FindTheClosestInRadiusByAddressController {
     public static final Logger LOG = LoggerFactory.getLogger(FindTheClosestInRadiusByAddressController.class);
 
     @RequestMapping(value = "/find-the-closest-in-radius-by-address", method = RequestMethod.GET)
-    public ModelAndView getFindTheClosestInRadiusByAddressFormPage(HttpSession session) {
+    public ModelAndView getFindTheClosestInRadiusByAddressFormPage() {
         LOG.info("User searched charging station at the area");
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius-by-address");
         modelAndView.addObject("title", "Find all charging points in radius by address");

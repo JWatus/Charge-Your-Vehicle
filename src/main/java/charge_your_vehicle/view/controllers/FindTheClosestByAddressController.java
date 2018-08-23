@@ -41,9 +41,7 @@ public class FindTheClosestByAddressController {
 
     @RequestMapping(value = "/find-the-closest-by-address", method = RequestMethod.GET)
     public ModelAndView getFindTheClosestByAddressFormPage() {
-
         LOG.info("User searched closest charging station by address");
-
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-by-address");
         modelAndView.addObject("title", "Find the closest charging point by address");
         modelAndView.addObject("addressDto", new AddressDto());
@@ -65,7 +63,6 @@ public class FindTheClosestByAddressController {
                 double longitude = coordinates.getLongitude();
                 double latitude = coordinates.getLatitude();
                 List<ChargingPoint> chargingPointsList = new ArrayList<>();
-
                 ChargingPoint chargingPoint = dataFilter.findClosestChargingStation(chargingPointRepository.findAll(), longitude, latitude);
                 chargingPointsList.add(chargingPoint);
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);

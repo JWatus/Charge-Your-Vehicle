@@ -7,7 +7,6 @@ import charge_your_vehicle.model.ChargingPoint;
 import charge_your_vehicle.service.converters.CoordinatesConverter;
 import charge_your_vehicle.service.data_filters.DataFilter;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
-import charge_your_vehicle.view.commons.Formaters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

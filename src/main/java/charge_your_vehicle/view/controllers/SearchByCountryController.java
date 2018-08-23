@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 @Controller
-public class SearchByCountryController extends HttpServlet {
+public class SearchByCountryController {
 
     private ChargingPointRepository chargingPointRepository;
     private CountryStatisticsRepository countryStatisticsRepository;
@@ -33,7 +32,7 @@ public class SearchByCountryController extends HttpServlet {
     public static final Logger LOG = LoggerFactory.getLogger(SearchByCountryController.class);
 
     @RequestMapping(value = "/search-by-country", method = RequestMethod.GET)
-    public ModelAndView getFindTheClosestPage() {
+    public ModelAndView getSearchByCountryFormPage() {
         LOG.info("User searched charging station at country");
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");
         modelAndView.addObject("title", "Search by country");
@@ -42,7 +41,7 @@ public class SearchByCountryController extends HttpServlet {
     }
 
     @RequestMapping(value = "/search-by-country", method = RequestMethod.POST)
-    public ModelAndView getFindAllInTownResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
+    public ModelAndView getSearchByCountryResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
 
         String country = chargingPointDto.getCountry();
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");

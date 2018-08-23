@@ -14,10 +14,8 @@ public class AboutController {
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public ModelAndView getAboutPage() {
-
         ModelAndView modelAndView = new ModelAndView("body-templates/about");
         modelAndView.addObject("title", "About");
-
         return modelAndView;
     }
 }

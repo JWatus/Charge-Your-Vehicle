@@ -13,11 +13,9 @@ public class HowToStartController {
     public static final Logger LOG = LoggerFactory.getLogger(HowToStartController.class);
 
     @RequestMapping(value = "/how-to-start", method = RequestMethod.GET)
-    public ModelAndView getAboutPage() {
-
+    public ModelAndView getHowToStartPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/how-to-start");
         modelAndView.addObject("title", "How to start");
-
         return modelAndView;
     }
 }

@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 @Controller
-public class AllLoadedPointsController extends HttpServlet {
+public class AllLoadedPointsController {
 
     public static final Logger LOG = LoggerFactory.getLogger(AllLoadedPointsController.class);
 

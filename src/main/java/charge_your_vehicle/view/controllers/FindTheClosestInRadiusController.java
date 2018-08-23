@@ -39,8 +39,7 @@ public class FindTheClosestInRadiusController {
     }
 
     @RequestMapping(value = "/find-the-closest-in-radius", method = RequestMethod.GET)
-    public ModelAndView getFindTheClosestPage() {
-
+    public ModelAndView getFindTheClosestInRadiusFormPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius");
         modelAndView.addObject("title", "Find all charging points in radius");
         modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
@@ -49,7 +48,7 @@ public class FindTheClosestInRadiusController {
     }
 
     @RequestMapping(value = "/find-the-closest-in-radius", method = RequestMethod.POST)
-    public ModelAndView getFindTheClosestResultPage(@ModelAttribute CoordinatesDto coordinatesDto) {
+    public ModelAndView getFindTheClosestInRadiusResultPage(@ModelAttribute CoordinatesDto coordinatesDto) {
 
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius");
 

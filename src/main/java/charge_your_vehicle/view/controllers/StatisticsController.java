@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 @Controller
-public class StatisticsController extends HttpServlet {
+public class StatisticsController {
 
     private CountryStatisticsRepository countryStatisticsRepository;
     private TownStatisticsRepository townStatisticsRepository;
@@ -28,7 +27,7 @@ public class StatisticsController extends HttpServlet {
     public static final Logger LOG = LoggerFactory.getLogger(StatisticsController.class);
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
-    public ModelAndView getStatisticsPage() {
+    public ModelAndView getStatisticsFormPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/statistics");
         modelAndView.addObject("title", "Statistics");
         modelAndView.addObject("statisticsDto", new StatisticsDto());

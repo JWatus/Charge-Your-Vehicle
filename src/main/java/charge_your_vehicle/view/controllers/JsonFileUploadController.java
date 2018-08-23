@@ -23,16 +23,12 @@ public class JsonFileUploadController {
 
     @RequestMapping(value = "/administration/json-upload", method = RequestMethod.GET)
     public ModelAndView uploadJSONFile() throws IOException {
-
         ModelAndView modelAndView = new ModelAndView("body-templates/json-upload");
         modelAndView.addObject("title", "Administration");
-
         int recordsAdded = fileUploadProcessor.uploadJsonFile();
-
         if (recordsAdded != 0) {
             modelAndView.addObject("recordsAdded", recordsAdded);
         }
-
         return modelAndView;
     }
 }

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-
 @Controller
 public class DataFromApiUploadController {
 
@@ -22,7 +20,7 @@ public class DataFromApiUploadController {
     }
 
     @RequestMapping(value = "/administration/load-data-from-api-world", method = RequestMethod.GET)
-    public ModelAndView loadDataFromWorld() throws IOException {
+    public ModelAndView loadDataFromWorld() {
         ModelAndView modelAndView = new ModelAndView("body-templates/load-data-from-api");
         modelAndView.addObject("title", "Administration");
         int recordsAdded;
@@ -38,7 +36,7 @@ public class DataFromApiUploadController {
     }
 
     @RequestMapping(value = "/administration/load-data-from-api-poland", method = RequestMethod.GET)
-    public ModelAndView loadDataFromPoland() throws IOException {
+    public ModelAndView loadDataFromPoland() {
         ModelAndView modelAndView = new ModelAndView("body-templates/load-data-from-api");
         modelAndView.addObject("title", "Administration");
         int recordsAdded;
@@ -54,7 +52,7 @@ public class DataFromApiUploadController {
     }
 
     @RequestMapping(value = "/administration/load-data-from-api-india", method = RequestMethod.GET)
-    public ModelAndView loadDataFromIndia() throws IOException {
+    public ModelAndView loadDataFromIndia() {
         ModelAndView modelAndView = new ModelAndView("body-templates/load-data-from-api");
         modelAndView.addObject("title", "Administration");
         int recordsAdded;

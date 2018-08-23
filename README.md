@@ -1,4 +1,4 @@
-## Charge Your Vehicle App :oncoming_automobile:
+## Charge Your Vehicle App  :oncoming_automobile: :fuelpump:
 
 ##### This application allows user to find charging points according to his preference.
 
@@ -59,4 +59,4 @@ In '*Search*' panel there are various options of finding charging points. You ca
 
 In '*Statistics*' panel there is possibility to check how many times charging points were searched for specific towns or countries.
 
-### Enjoy :heavy_exclamation_mark: :heavy_exclamation_mark: :heavy_exclamation_mark:
+### Enjoy :heavy_exclamation_mark:

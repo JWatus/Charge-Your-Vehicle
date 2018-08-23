@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.data_filters;
 
-import charge_your_vehicle.model.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

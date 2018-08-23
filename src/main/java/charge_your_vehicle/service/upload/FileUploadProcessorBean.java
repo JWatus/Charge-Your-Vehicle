@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.upload;
 
-import charge_your_vehicle.model.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import charge_your_vehicle.service.json_parser.CustomGsonBuilder;
 import charge_your_vehicle.service.json_parser.JsonParser;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,9 @@ import java.util.stream.Collectors;
 public class FileUploadProcessorBean extends UploadProcessor {
 
     public int uploadJsonFile() throws IOException {
-
         File initialFile = new File("src/main/resources/sample.json");
         InputStream fileContent = new FileInputStream(initialFile);
         String content = convertInputSteamToString(fileContent);
-
         List<ChargingPoint> chargingPointList = new JsonParser(new CustomGsonBuilder()).jsonToChargingPointList(content);
 
         super.clearTables();

@@ -1,7 +1,9 @@
 package charge_your_vehicle.service.upload;
 
-import charge_your_vehicle.dao.*;
-import charge_your_vehicle.model.*;
+import charge_your_vehicle.repository.*;
+import charge_your_vehicle.model.entity.charging_points_data.AddressInfo;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,6 @@ import java.util.Set;
 @Service
 class UploadProcessor {
 
-    @Autowired
-    private LevelRepository levelRepository;
-    @Autowired
-    private ConnectionRepository connectionRepository;
     @Autowired
     private ChargingPointRepository chargingPointRepository;
     @Autowired
@@ -49,8 +47,6 @@ class UploadProcessor {
     }
 
     void clearTables() {
-        connectionRepository.deleteAll();
-        levelRepository.deleteAll();
         chargingPointRepository.deleteAll();
         addressInfoRepository.deleteAll();
         countryRepository.deleteAll();

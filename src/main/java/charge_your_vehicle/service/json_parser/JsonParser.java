@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.json_parser;
 
-import charge_your_vehicle.model.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import java.util.List;
 
 public class JsonParser {

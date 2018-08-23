@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.json_parser;
 
-import charge_your_vehicle.model.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;

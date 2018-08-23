@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.json_parser;
 
-import charge_your_vehicle.model.*;
+import charge_your_vehicle.model.entity.charging_points_data.*;
 import com.google.gson.*;
 
 import org.slf4j.Logger;

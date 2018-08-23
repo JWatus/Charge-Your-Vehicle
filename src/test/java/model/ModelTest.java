@@ -1,6 +1,7 @@
 package model;
 
-import charge_your_vehicle.model.*;
+import charge_your_vehicle.model.entity.charging_points_data.*;
+import charge_your_vehicle.model.gmaps_api.Coordinates;
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.PojoValidator;

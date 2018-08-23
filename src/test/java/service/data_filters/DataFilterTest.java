@@ -1,6 +1,7 @@
 package service.data_filters;
 
-import charge_your_vehicle.model.*;
+import charge_your_vehicle.model.entity.charging_points_data.AddressInfo;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import charge_your_vehicle.service.data_filters.DataFilter;
 import org.junit.jupiter.api.Test;
 

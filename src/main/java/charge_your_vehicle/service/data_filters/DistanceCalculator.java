@@ -3,10 +3,9 @@ package charge_your_vehicle.service.data_filters;
 import charge_your_vehicle.service.properties.AppProperties;
 
 public class DistanceCalculator {
-    private static final double R = 6371;   //km
+    private static final double R = 6371;  // KM
 
     public static double distanceBetweenTwoPoints(double latitude1, double latitude2, double longitude1, double longitude2) {
-
         double distanceLatitude = Math.toRadians(latitude2 - latitude1);
         double distanceLongitude = Math.toRadians(longitude2 - longitude1);
         double a = Math.sin(distanceLatitude / 2) * Math.sin(distanceLatitude / 2) +

@@ -1,6 +1,6 @@
 package charge_your_vehicle.service.upload;
 
-import charge_your_vehicle.model.ChargingPoint;
+import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import charge_your_vehicle.service.json_parser.CustomGsonBuilder;
 import charge_your_vehicle.service.json_parser.JsonParser;
 import org.slf4j.Logger;
@@ -32,7 +32,6 @@ public class ApiUploadProcessorBean extends UploadProcessor {
     }
 
     private int uploadJsonApi(String Json) {
-
         List<ChargingPoint> chargingPointList = new JsonParser(new CustomGsonBuilder()).jsonToChargingPointList(Json);
         clearTables();
         log.info("Saving [{}] points", chargingPointList.size());
@@ -41,7 +40,6 @@ public class ApiUploadProcessorBean extends UploadProcessor {
     }
 
     private String downloadJsonAsStringFromApi(String properties) {
-
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("https://api.openchargemap.io/v2/poi/?output=json&" + properties);
         Response response = target.request().accept(MediaType.APPLICATION_JSON).header("User-Agent", "curl/7.47.0").get();

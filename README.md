@@ -1,6 +1,6 @@
-## Charge Your Vehicle App  :oncoming_automobile: :fuelpump:
+## Charge Your Vehicle App :fuelpump:
 
-##### This application allows user to find charging points according to his preference.
+#### This application allows user to find charging points according to his preference.
 
 ### Configuration 
 

@@ -59,4 +59,16 @@ In '*Search*' panel there are various options of finding charging points. You ca
 
 In '*Statistics*' panel there is possibility to check how many times charging points were searched for specific towns or countries.
 
+### Technology used to create and develop this application: 
+- Java 8
+- Spring Boot
+- Spring MVC
+- Spring Web Services
+- Thymeleaf
+- Bootstrap
+- JavaScript
+- Google Maps API
+- H2
+- JUnit 5
+
 ### Enjoy :heavy_exclamation_mark:

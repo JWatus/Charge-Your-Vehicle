@@ -85,11 +85,14 @@
 
                 <script th:inline="javascript">
 
-                    function addMarker(mapa, lat, lon, markerOptions) {
+                    function addMarker(mapa, lat, lon, markerOptions, bounds) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
                         markerOptions.map = mapa;
                         var marker = new google.maps.Marker(markerOptions);
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                        bounds.extend(marker.getPosition());
+                        mapa.fitBounds(bounds);
                     }
 
                     var middleLat = [[${chargingPoints[0].latitude}]];
@@ -116,24 +119,26 @@
                     } else {
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
-                                zoom: 4,
                                 center: {lat: middleLat, lng: middleLon}
                             });
 
-                        /*<![CDATA[*/
+                            var bounds = new google.maps.LatLngBounds();
 
-                        var points = [[${chargingPoints}]];
-                        var lati;
-                        var longi;
-                        var title;
-                        for (i = 0; i < points.length; i++) {
-                            lati = points[i].latitude;
-                            longi = points[i].longitude;
-                            title = points[i].title;
-                            addMarker(map, lati, longi, {title: title});
-                        }
-                        /*]]>*/
+                            /*<![CDATA[*/
 
+                            var points = [[${chargingPoints}]];
+                            var lati;
+                            var longi;
+                            var title;
+
+                            for (i = 0; i < points.length; i++) {
+                                lati = points[i].latitude;
+                                longi = points[i].longitude;
+                                title = points[i].title;
+                                addMarker(map, lati, longi, {title: title}, bounds);
+                            }
+
+                            /*]]>*/
                         }
                     }
 

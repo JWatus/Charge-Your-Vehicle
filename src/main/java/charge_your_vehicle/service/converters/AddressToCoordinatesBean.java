@@ -21,17 +21,17 @@ public class AddressToCoordinatesBean {
     public Coordinates getCoordinates(String address) {
         try {
             String escapedAddress = HtmlUtils.htmlEscape(address);
+            escapedAddress = escapedAddress.replaceAll(" ", "+");
             Client client = ClientBuilder.newClient();
             UrlBuilder builder = new UrlBuilder(API_URL);
-            builder.addParameterToUrl("key", AppProperties.getInstance().getGoogleApiKey());
             builder.addParameterToUrl("address", escapedAddress);
+            builder.addParameterToUrl("key", AppProperties.getInstance().getGoogleApiKey());
             WebTarget webTarget = client.target(builder.toString());
             Response response = webTarget.request().accept(MediaType.APPLICATION_JSON).get();
 
             GMapsApiResponse data = response.readEntity(GMapsApiResponse.class);
             response.close();
             GMapsApiLocation location = data.getResults().get(0).getGeometry().getLocation();
-
             return new Coordinates(location.getLat(), location.getLng());
         } catch (Exception e) {
             return null;

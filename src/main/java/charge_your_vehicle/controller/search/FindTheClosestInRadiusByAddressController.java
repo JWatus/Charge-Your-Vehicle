@@ -44,6 +44,7 @@ public class FindTheClosestInRadiusByAddressController {
         LOG.info("User searched charging station at the area");
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius-by-address");
         modelAndView.addObject("title", "Find all charging points in radius by address");
+        modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
         modelAndView.addObject("addressDto", new AddressDto());
         return modelAndView;
     }

@@ -1,14 +1,14 @@
 package charge_your_vehicle.controller.search;
 
-import charge_your_vehicle.repository.ChargingPointRepository;
 import charge_your_vehicle.model.dto.AddressDto;
 import charge_your_vehicle.model.dto.ChargingPointDto;
 import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import charge_your_vehicle.model.gmaps_api.Coordinates;
+import charge_your_vehicle.repository.ChargingPointRepository;
 import charge_your_vehicle.service.converters.AddressToCoordinatesBean;
 import charge_your_vehicle.service.data_filters.DataFilter;
-import charge_your_vehicle.service.properties.AppPropertiesBean;
 import charge_your_vehicle.service.formaters.Formaters;
+import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -78,16 +78,21 @@ public class FindTheClosestInRadiusByAddressController {
                 double longitude = coordinates.getLongitude();
                 double latitude = coordinates.getLatitude();
 
-                List<ChargingPoint> chargingPointsList = dataFilter
-                        .findChargingStationAtArea(chargingPointRepository.findAll(), longitude,
-                                latitude, radius);
-
-                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
-                modelAndView = new ModelAndView("body-templates/results");
-                modelAndView.addObject("points-map", "results");
-                modelAndView.addObject("chargingPoints", chargingPointsDtoList);
-                modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
-                modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
+                List<ChargingPoint> chargingPointsList = dataFilter.findChargingStationAtArea(
+                        chargingPointRepository.findAll(), longitude, latitude, radius);
+                if (!chargingPointsList.isEmpty()) {
+                    List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
+                    modelAndView = new ModelAndView("body-templates/results");
+                    modelAndView.addObject("points-map", "results");
+                    modelAndView.addObject("chargingPoints", chargingPointsDtoList);
+                    modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
+                    modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
+                    modelAndView.addObject("longitude", longitude);
+                    modelAndView.addObject("latitude", latitude);
+                } else {
+                    modelAndView.addObject("error", "No charging points were found in given radius");
+                    return modelAndView;
+                }
             } else {
                 modelAndView.addObject("error", "Google converter couldn't get coordinates from this address");
                 return modelAndView;

@@ -146,18 +146,18 @@
                                 addMyMarker(map, latitude, longitude, {title: 'My position'}, bounds);
                             }
 
-                             /*<![CDATA[*/
+                            /*<![CDATA[*/
 
-                                var points = [[${chargingPoints}]];
-                                var lati;
-                                var longi;
-                                var title;
-                                for (i = 0; i < points.length; i++) {
-                                    lati = points[i].latitude;
-                                    longi = points[i].longitude;
-                                    title = points[i].title;
-                                    addMarker(map, lati, longi, {title: title}, bounds);
-                                }
+                            var points = [[${chargingPoints}]];
+                            var lati;
+                            var longi;
+                            var title;
+                            for (i = 0; i < points.length; i++) {
+                                lati = points[i].latitude;
+                                longi = points[i].longitude;
+                                title = points[i].title;
+                                addMarker(map, lati, longi, {title: title}, bounds);
+                            }
 
                             /*]]>*/
                         }

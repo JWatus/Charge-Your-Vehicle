@@ -37,7 +37,7 @@ And fill form with those values:
 After doing this press Connect button.
 
 ### Options
-Beneath are described few steps how to start and options which You can find in this application.
+Few steps how to start and options which You can find in this application are described beneath.
 
 #### Setting properties
 '*Properties*' section You can find in the '*Administration*' panel. You can set there the unit in which range for search charging points will be taken. Available options are: miles, kilometers and meters. 

@@ -85,18 +85,22 @@
 
                 <script th:inline="javascript">
 
+                    function addSingleMarker(mapa, lat, lon, markerOptions) {
+                        markerOptions.position = new google.maps.LatLng(lat, lon);
+                        markerOptions.map = mapa;
+                        var marker = new google.maps.Marker(markerOptions);
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+                    }
+
                     function addMarker(mapa, lat, lon, markerOptions, bounds) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
                         markerOptions.map = mapa;
                         var marker = new google.maps.Marker(markerOptions);
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-
                         bounds.extend(marker.getPosition());
                         mapa.fitBounds(bounds);
                     }
 
-                    var middleLat = [[${chargingPoints[0].latitude}]];
-                    var middleLon = [[${chargingPoints[0].longitude}]];
                     var size = [[${chargingPointsSize}]];
 
                     if (size == 0) {
@@ -109,35 +113,35 @@
 
                     } else if (size == 1) {
                         function initMap() {
+                            var lati = [[${chargingPoints[0].latitude}]];
+                            var longi = [[${chargingPoints[0].longitude}]];
+                            var title = [[${chargingPoints[0].title}]];
+
                             map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 12,
-                                center: {lat: middleLat, lng: middleLon}
+                                center: {lat: lati, lng: longi}
                             });
-                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'});
+
+                            addSingleMarker(map, lati, longi, {title: title});
                         }
 
                     } else {
                         function initMap() {
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: middleLat, lng: middleLon}
-                            });
+                            map = new google.maps.Map(document.getElementById('map'), {});
 
                             var bounds = new google.maps.LatLngBounds();
 
                             /*<![CDATA[*/
-
                             var points = [[${chargingPoints}]];
                             var lati;
                             var longi;
                             var title;
-
                             for (i = 0; i < points.length; i++) {
                                 lati = points[i].latitude;
                                 longi = points[i].longitude;
                                 title = points[i].title;
                                 addMarker(map, lati, longi, {title: title}, bounds);
                             }
-
                             /*]]>*/
                         }
                     }

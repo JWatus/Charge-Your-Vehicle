@@ -84,12 +84,11 @@
 
                 <script th:inline="javascript">
 
-                    function addMyMarker(mapa, lat, lon, markerOptions, bounds) {
+                    function addChosenMarker(mapa, lat, lon, markerOptions, bounds) {
                         markerOptions.position = new google.maps.LatLng(lat, lon);
                         markerOptions.map = mapa;
                         var marker = new google.maps.Marker(markerOptions);
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-
                         bounds.extend(marker.getPosition());
                         mapa.fitBounds(bounds);
                     }
@@ -99,7 +98,6 @@
                         markerOptions.map = mapa;
                         var marker = new google.maps.Marker(markerOptions);
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-
                         bounds.extend(marker.getPosition());
                         mapa.fitBounds(bounds);
                     }
@@ -125,9 +123,9 @@
                             var bounds = new google.maps.LatLngBounds();
 
                             if (by_address != null) {
-                                addMyMarker(map, latitude, longitude, {title: 'Chosen address'}, bounds);
+                                addChosenMarker(map, latitude, longitude, {title: 'Chosen address'}, bounds);
                             } else {
-                                addMyMarker(map, latitude, longitude, {title: 'Chosen position'}, bounds);
+                                addChosenMarker(map, latitude, longitude, {title: 'Chosen position'}, bounds);
                             }
 
                             var lati = [[${chargingPoints[0].latitude}]];
@@ -141,9 +139,11 @@
                             map = new google.maps.Map(document.getElementById('map'), {});
 
                             var bounds = new google.maps.LatLngBounds();
-                            
-                            if (latitude != null) {
-                                addMyMarker(map, latitude, longitude, {title: 'My position'}, bounds);
+
+                            if (by_address != null) {
+                                addChosenMarker(map, latitude, longitude, {title: 'Chosen address'}, bounds);
+                            } else {
+                                addChosenMarker(map, latitude, longitude, {title: 'Chosen position'}, bounds);
                             }
 
                             /*<![CDATA[*/

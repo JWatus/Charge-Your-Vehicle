@@ -1,4 +1,4 @@
-package charge_your_vehicle.controller;
+package charge_your_vehicle.controller.administration;
 
 import charge_your_vehicle.service.upload.FileUploadProcessorBean;
 import org.slf4j.Logger;

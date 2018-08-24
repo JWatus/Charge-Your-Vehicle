@@ -1,4 +1,4 @@
-package charge_your_vehicle.controller;
+package charge_your_vehicle.controller.administration;
 
 import charge_your_vehicle.model.dto.ParametersDto;
 import charge_your_vehicle.service.properties.AppPropertiesBean;

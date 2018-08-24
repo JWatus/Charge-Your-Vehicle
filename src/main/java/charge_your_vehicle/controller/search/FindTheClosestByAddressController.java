@@ -1,4 +1,4 @@
-package charge_your_vehicle.controller;
+package charge_your_vehicle.controller.search;
 
 import charge_your_vehicle.repository.ChargingPointRepository;
 import charge_your_vehicle.model.dto.AddressDto;

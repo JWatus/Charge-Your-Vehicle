@@ -1,7 +1,7 @@
-package charge_your_vehicle.controller;
+package charge_your_vehicle.controller.search;
 
 import charge_your_vehicle.repository.ChargingPointRepository;
-import charge_your_vehicle.repository.statistics.CountryStatisticsRepository;
+import charge_your_vehicle.repository.statistics.TownStatisticsRepository;
 import charge_your_vehicle.model.dto.ChargingPointDto;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
 import org.slf4j.Logger;
@@ -15,49 +15,49 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class SearchByCountryController {
+public class SearchByTownController {
 
     private ChargingPointRepository chargingPointRepository;
-    private CountryStatisticsRepository countryStatisticsRepository;
+    private TownStatisticsRepository townStatisticsRepository;
     private AppPropertiesBean appPropertiesBean;
 
-    public SearchByCountryController(ChargingPointRepository chargingPointRepository,
-                                     CountryStatisticsRepository countryStatisticsRepository,
-                                     AppPropertiesBean appPropertiesBean) {
+    public SearchByTownController(ChargingPointRepository chargingPointRepository,
+                                  TownStatisticsRepository townStatisticsRepository,
+                                  AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
-        this.countryStatisticsRepository = countryStatisticsRepository;
+        this.townStatisticsRepository = townStatisticsRepository;
         this.appPropertiesBean = appPropertiesBean;
     }
 
-    public static final Logger LOG = LoggerFactory.getLogger(SearchByCountryController.class);
+    public static final Logger LOG = LoggerFactory.getLogger(SearchByTownController.class);
 
-    @RequestMapping(value = "/search-by-country", method = RequestMethod.GET)
-    public ModelAndView getSearchByCountryFormPage() {
-        LOG.info("User searched charging station at country");
-        ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");
-        modelAndView.addObject("title", "Search by country");
+    @RequestMapping(value = "/search-by-town", method = RequestMethod.GET)
+    public ModelAndView getSearchByTownFormPage() {
+        LOG.info("User searched charging station at town");
+        ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
+        modelAndView.addObject("title", "Search by town");
         modelAndView.addObject("chargingPointDto", new ChargingPointDto());
         return modelAndView;
     }
 
-    @RequestMapping(value = "/search-by-country", method = RequestMethod.POST)
-    public ModelAndView getSearchByCountryResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
+    @RequestMapping(value = "/search-by-town", method = RequestMethod.POST)
+    public ModelAndView getSearchByTownResultPage(@ModelAttribute ChargingPointDto chargingPointDto) {
 
-        String country = chargingPointDto.getCountry();
-        ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");
+        String town = chargingPointDto.getTown();
+        ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
 
-        if (country == null || country.isEmpty()) {
+        if (town == null || town.isEmpty()) {
             modelAndView.addObject("error", "Fill the field with correct value");
             return modelAndView;
         } else {
             try {
-                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByCountry(country));
+                List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByTown(town));
                 if (chargingPointsDtoList.size() > 0) {
-                    countryStatisticsRepository.addToStatistics(country);
+                    townStatisticsRepository.addToStatistics(town);
                     modelAndView = new ModelAndView("body-templates/results-town-and-country");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
-                    modelAndView.addObject("title", "Search by country");
+                    modelAndView.addObject("title", "Search by town");
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
                     return modelAndView;
                 } else {

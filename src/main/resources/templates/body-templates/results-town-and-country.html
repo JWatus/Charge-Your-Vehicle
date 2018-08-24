@@ -89,7 +89,7 @@
                         markerOptions.position = new google.maps.LatLng(lat, lon);
                         markerOptions.map = mapa;
                         var marker = new google.maps.Marker(markerOptions);
-                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
 
                         bounds.extend(marker.getPosition());
                         mapa.fitBounds(bounds);

@@ -83,12 +83,13 @@ public class FindTheClosestInRadiusByAddressController {
                 if (!chargingPointsList.isEmpty()) {
                     List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointsList);
                     modelAndView = new ModelAndView("body-templates/results");
-                    modelAndView.addObject("points-map", "results");
+                    modelAndView.addObject("title", "Find all charging points in radius by address");
                     modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                     modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                     modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
-                    modelAndView.addObject("longitude", longitude);
+                    modelAndView.addObject("by_address", "By address");
                     modelAndView.addObject("latitude", latitude);
+                    modelAndView.addObject("longitude", longitude);
                 } else {
                     modelAndView.addObject("error", "No charging points were found in given radius");
                     return modelAndView;

@@ -104,10 +104,9 @@
                         mapa.fitBounds(bounds);
                     }
 
-                    var middleLat = [[${chargingPoints[0].latitude}]];
-                    var middleLon = [[${chargingPoints[0].longitude}]];
                     var size = [[${chargingPointsSize}]];
 
+                    var by_address = [[${by_address}]];
                     var latitude = [[${latitude}]];
                     var longitude = [[${longitude}]];
 
@@ -121,33 +120,33 @@
 
                     } else if (size == 1) {
                         function initMap() {
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: middleLat, lng: middleLon}
-                            });
+                            map = new google.maps.Map(document.getElementById('map'), {});
 
                             var bounds = new google.maps.LatLngBounds();
 
-                            if (latitude != null) {
-                                addMyMarker(map, latitude, longitude, {title: 'My position'}, bounds);
+                            if (by_address != null) {
+                                addMyMarker(map, latitude, longitude, {title: 'Chosen address'}, bounds);
+                            } else {
+                                addMyMarker(map, latitude, longitude, {title: 'Chosen position'}, bounds);
                             }
 
-                            addMarker(map, middleLat, middleLon, {title: '[[${chargingPoints[0].title}]]'}, bounds);
+                            var lati = [[${chargingPoints[0].latitude}]];
+                            var longi = [[${chargingPoints[0].longitude}]];
+                            var title = [[${chargingPoints[0].title}]];
+                            addMarker(map, lati, longi, {title: title}, bounds);
                         }
 
                     } else {
                         function initMap() {
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: middleLat, lng: middleLon}
-                            });
+                            map = new google.maps.Map(document.getElementById('map'), {});
 
                             var bounds = new google.maps.LatLngBounds();
-
+                            
                             if (latitude != null) {
                                 addMyMarker(map, latitude, longitude, {title: 'My position'}, bounds);
                             }
 
                             /*<![CDATA[*/
-
                             var points = [[${chargingPoints}]];
                             var lati;
                             var longi;
@@ -158,7 +157,6 @@
                                 title = points[i].title;
                                 addMarker(map, lati, longi, {title: title}, bounds);
                             }
-
                             /*]]>*/
                         }
                     }

@@ -1,10 +1,10 @@
 package charge_your_vehicle.controller.search;
 
-import charge_your_vehicle.repository.ChargingPointRepository;
 import charge_your_vehicle.model.dto.AddressDto;
 import charge_your_vehicle.model.dto.ChargingPointDto;
 import charge_your_vehicle.model.entity.charging_points_data.ChargingPoint;
 import charge_your_vehicle.model.gmaps_api.Coordinates;
+import charge_your_vehicle.repository.ChargingPointRepository;
 import charge_your_vehicle.service.converters.AddressToCoordinatesBean;
 import charge_your_vehicle.service.data_filters.DataFilter;
 import charge_your_vehicle.service.properties.AppPropertiesBean;
@@ -52,6 +52,7 @@ public class FindTheClosestByAddressController {
     public ModelAndView getFindTheClosestByAddressResultPage(@ModelAttribute AddressDto addressDto) {
 
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-by-address");
+        modelAndView.addObject("title", "Find the closest charging point by address");
 
         String address = addressDto.getAddress();
         if (address == null || address.isEmpty()) {
@@ -71,6 +72,9 @@ public class FindTheClosestByAddressController {
                 modelAndView.addObject("chargingPoints", chargingPointsDtoList);
                 modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
                 modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
+                modelAndView.addObject("by_address", "By address");
+                modelAndView.addObject("latitude", latitude);
+                modelAndView.addObject("longitude", longitude);
             } else {
                 modelAndView.addObject("error", "Google converter couldn't get coordinates from this address");
                 return modelAndView;

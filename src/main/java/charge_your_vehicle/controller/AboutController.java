@@ -19,5 +19,4 @@ public class AboutController {
     public ModelAndView getAboutPage() {
         return informationModelsProvider.getModelAndViewForAboutPage();
     }
-
 }

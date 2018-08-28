@@ -1,5 +1,6 @@
 package charge_your_vehicle.controller;
 
+import charge_your_vehicle.service.providers.InformationModelsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,14 @@ public class HowToStartController {
 
     public static final Logger LOG = LoggerFactory.getLogger(HowToStartController.class);
 
-    @RequestMapping(value = "/how-to-start", method = RequestMethod.GET)
-    public ModelAndView getHowToStartPage() {
-        return getModelAndViewHowToStartPage();
+    private final InformationModelsProvider informationModelsProvider;
+
+    public HowToStartController(InformationModelsProvider informationModelsProvider) {
+        this.informationModelsProvider = informationModelsProvider;
     }
 
-    private ModelAndView getModelAndViewHowToStartPage() {
-        ModelAndView modelAndView = new ModelAndView("body-templates/how-to-start");
-        modelAndView.addObject("title", "How to start");
-        return modelAndView;
+    @RequestMapping(value = "/how-to-start", method = RequestMethod.GET)
+    public ModelAndView getHowToStartPage() {
+        return informationModelsProvider.getModelAndViewHowToStartPage();
     }
 }

@@ -1,4 +1,4 @@
-package charge_your_vehicle.controller.search;
+package charge_your_vehicle.controller;
 
 import charge_your_vehicle.model.dto.ChargingPointDto;
 import charge_your_vehicle.service.providers.FindByLocationModelsProvider;

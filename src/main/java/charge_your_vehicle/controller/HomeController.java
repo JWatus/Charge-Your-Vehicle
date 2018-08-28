@@ -14,6 +14,10 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHomePage() {
+        return getModelAndViewHomePage();
+    }
+
+    private ModelAndView getModelAndViewHomePage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/home");
         modelAndView.addObject("title", "Home");
         return modelAndView;

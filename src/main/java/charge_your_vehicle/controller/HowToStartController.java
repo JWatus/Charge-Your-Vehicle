@@ -14,6 +14,10 @@ public class HowToStartController {
 
     @RequestMapping(value = "/how-to-start", method = RequestMethod.GET)
     public ModelAndView getHowToStartPage() {
+        return getModelAndViewHowToStartPage();
+    }
+
+    private ModelAndView getModelAndViewHowToStartPage() {
         ModelAndView modelAndView = new ModelAndView("body-templates/how-to-start");
         modelAndView.addObject("title", "How to start");
         return modelAndView;

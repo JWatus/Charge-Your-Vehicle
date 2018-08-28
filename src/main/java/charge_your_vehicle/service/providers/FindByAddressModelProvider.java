@@ -62,22 +62,26 @@ public class FindByAddressModelProvider {
     private ModelAndView getClosestPointToConvertedAddress(ModelAndView modelAndView, String address) {
         Coordinates coordinates = addressToCoordinatesBean.getCoordinates(address);
         if (coordinates != null) {
-            double longitude = coordinates.getLongitude();
-            double latitude = coordinates.getLatitude();
-            List<ChargingPointDto> chargingPointsDtoList = findClosestPointToAddress(longitude, latitude);
-            if (!chargingPointsDtoList.isEmpty()) {
-                modelAndView = new ModelAndView("body-templates/results");
-                addObjectsToModelAndView(modelAndView, longitude, latitude, chargingPointsDtoList);
-            } else {
-                return getErrorMessage(modelAndView, "There is not loaded any charging point to database");
-            }
-            return modelAndView;
+            return findChargingPoint(modelAndView, coordinates);
         } else {
             return getErrorMessage(modelAndView, "Google converter couldn't get coordinates from this address");
         }
     }
 
-    private List<ChargingPointDto> findClosestPointToAddress(double longitude, double latitude) {
+    private ModelAndView findChargingPoint(ModelAndView modelAndView, Coordinates coordinates) {
+        double longitude = coordinates.getLongitude();
+        double latitude = coordinates.getLatitude();
+        List<ChargingPointDto> chargingPointsDtoList = putFoundChargingPointToTheList(longitude, latitude);
+        if (!chargingPointsDtoList.isEmpty()) {
+            modelAndView = new ModelAndView("body-templates/results");
+            addObjectsToModelAndView(modelAndView, longitude, latitude, chargingPointsDtoList);
+            return modelAndView;
+        } else {
+            return getErrorMessage(modelAndView, "There is not loaded any charging point to database");
+        }
+    }
+
+    private List<ChargingPointDto> putFoundChargingPointToTheList(double longitude, double latitude) {
         List<ChargingPoint> chargingPointsList = new ArrayList<>();
         ChargingPoint chargingPoint = dataFilter.findClosestChargingStation(chargingPointRepository.findAll(), longitude, latitude);
         if (chargingPoint != null) {
@@ -103,13 +107,16 @@ public class FindByAddressModelProvider {
         ModelAndView modelAndView = new ModelAndView("body-templates/find-the-closest-in-radius-by-address");
         modelAndView.addObject("title", "Find all charging points in radius by address");
         modelAndView.addObject("current_unit", Formaters.naturalFormat(appPropertiesBean.getCurrentUnit().name()));
+
         String radiusString = addressDto.getRadius();
         String address = addressDto.getAddress();
+
         boolean isRadiusStringNull = (radiusString == null || radiusString.isEmpty());
         boolean isRadiusCorrect = false;
         if (!isRadiusStringNull) {
             isRadiusCorrect = (radiusString.length() < 10);
         }
+
         if (address == null || address.isEmpty()) {
             return getErrorMessage(modelAndView, "Address can't be empty");
         } else if (!isRadiusCorrect) {

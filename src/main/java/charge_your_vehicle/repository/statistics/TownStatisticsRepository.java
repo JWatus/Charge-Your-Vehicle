@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class TownStatisticsRepository {
+public class TownStatisticsRepository implements StatisticsRepository {
 
     private EntityManager entityManager;
 
@@ -31,6 +31,7 @@ public class TownStatisticsRepository {
         return query.getResultList();
     }
 
+    @Override
     public void addToStatistics(String town) {
         TownStatistics townStatistics = findByName(town);
         if (townStatistics != null) {

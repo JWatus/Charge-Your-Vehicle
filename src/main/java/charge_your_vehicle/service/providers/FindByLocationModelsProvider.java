@@ -15,18 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Service
-public class FindersByLocationModelsProvider {
+public class FindByLocationModelsProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FindersByLocationModelsProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FindByLocationModelsProvider.class);
 
     private ChargingPointRepository chargingPointRepository;
     private TownStatisticsRepository townStatisticsRepository;
     private CountryStatisticsRepository countryStatisticsRepository;
     private AppPropertiesBean appPropertiesBean;
 
-    public FindersByLocationModelsProvider(ChargingPointRepository chargingPointRepository,
-                                           TownStatisticsRepository townStatisticsRepository,
-                                           AppPropertiesBean appPropertiesBean, CountryStatisticsRepository countryStatisticsRepository) {
+    public FindByLocationModelsProvider(ChargingPointRepository chargingPointRepository,
+                                        TownStatisticsRepository townStatisticsRepository,
+                                        AppPropertiesBean appPropertiesBean, CountryStatisticsRepository countryStatisticsRepository) {
         this.chargingPointRepository = chargingPointRepository;
         this.townStatisticsRepository = townStatisticsRepository;
         this.appPropertiesBean = appPropertiesBean;
@@ -45,14 +45,14 @@ public class FindersByLocationModelsProvider {
         String town = chargingPointDto.getTown();
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-town");
         if (town == null || town.isEmpty()) {
-            return getErrorMessage(modelAndView, "Fill the field with correct value");
+            return getErrorMessage(modelAndView, "Fill the field with correct value", "Search by town");
         } else {
             try {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByTown(town));
-                return checkChargingPointsInGivenLocation(town, modelAndView, townStatisticsRepository, chargingPointsDtoList);
+                return checkChargingPointsInGivenLocation(town, "town", modelAndView, townStatisticsRepository, chargingPointsDtoList);
             } catch (Exception e) {
                 LOG.error("Exception was catched.");
-                return getErrorMessage(modelAndView, "No charging points found");
+                return getErrorMessage(modelAndView, "No charging points found", "Search by town");
             }
         }
     }
@@ -61,19 +61,20 @@ public class FindersByLocationModelsProvider {
         String country = chargingPointDto.getCountry();
         ModelAndView modelAndView = new ModelAndView("body-templates/search-by-country");
         if (country == null || country.isEmpty()) {
-            return getErrorMessage(modelAndView, "Fill the field with correct value");
+            return getErrorMessage(modelAndView, "Fill the field with correct value", "Search by country");
         } else {
             try {
                 List<ChargingPointDto> chargingPointsDtoList = ChargingPointDto.convertFromChargingPointList(chargingPointRepository.findByCountry(country));
-                return checkChargingPointsInGivenLocation(country, modelAndView, countryStatisticsRepository, chargingPointsDtoList);
+                return checkChargingPointsInGivenLocation(country, "country", modelAndView, countryStatisticsRepository, chargingPointsDtoList);
             } catch (Exception e) {
                 LOG.error("Exception was catched.");
-                return getErrorMessage(modelAndView, "No charging points found");
+                return getErrorMessage(modelAndView, "No charging points found", "Search by country");
             }
         }
     }
 
     private ModelAndView checkChargingPointsInGivenLocation(String location,
+                                                            String townOrCountry,
                                                             ModelAndView modelAndView,
                                                             StatisticsRepository statisticsRepository,
                                                             List<ChargingPointDto> chargingPointsDtoList) {
@@ -82,16 +83,17 @@ public class FindersByLocationModelsProvider {
             modelAndView = new ModelAndView("body-templates/results-town-and-country");
             modelAndView.addObject("chargingPoints", chargingPointsDtoList);
             modelAndView.addObject("chargingPointsSize", chargingPointsDtoList.size());
-            modelAndView.addObject("title", "Search by " + location);
+            modelAndView.addObject("title", "Search by " + townOrCountry);
             modelAndView.addObject("google_api_key", appPropertiesBean.getGoogleApiKey());
             return modelAndView;
         } else {
-            return getErrorMessage(modelAndView, "No charging points found");
+            return getErrorMessage(modelAndView, "No charging points found", "Search by " + townOrCountry);
         }
     }
 
-    private ModelAndView getErrorMessage(ModelAndView modelAndView, String errorMessage) {
+    private ModelAndView getErrorMessage(ModelAndView modelAndView, String errorMessage, String title) {
         modelAndView.addObject("error", errorMessage);
+        modelAndView.addObject("title", title);
         return modelAndView;
     }
 }

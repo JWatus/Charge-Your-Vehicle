@@ -7,16 +7,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HowToStartController {
+public class InformationsController {
 
     private final InformationModelsProvider informationModelsProvider;
 
-    public HowToStartController(InformationModelsProvider informationModelsProvider) {
+    public InformationsController(InformationModelsProvider informationModelsProvider) {
         this.informationModelsProvider = informationModelsProvider;
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView getHomePage() {
+        return informationModelsProvider.getModelAndViewHomePage();
     }
 
     @RequestMapping(value = "/how-to-start", method = RequestMethod.GET)
     public ModelAndView getHowToStartPage() {
         return informationModelsProvider.getModelAndViewHowToStartPage();
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public ModelAndView getAboutPage() {
+        return informationModelsProvider.getModelAndViewForAboutPage();
     }
 }

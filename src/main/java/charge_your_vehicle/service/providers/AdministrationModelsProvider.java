@@ -56,6 +56,11 @@ public class AdministrationModelsProvider {
     public ModelAndView getModelAndViewLoadDataFromApi(int uploadedPoints) {
         ModelAndView modelAndView = new ModelAndView("body-templates/load-data-from-api");
         modelAndView.addObject("title", "Administration");
+        addRecords(uploadedPoints, modelAndView);
+        return modelAndView;
+    }
+
+    private void addRecords(int uploadedPoints, ModelAndView modelAndView) {
         int recordsAdded;
         try {
             recordsAdded = uploadedPoints;
@@ -65,7 +70,6 @@ public class AdministrationModelsProvider {
         } catch (Exception e) {
             LOG.error("Failed to update charging points from api: {}", e);
         }
-        return modelAndView;
     }
 
     /*    ALL LOADED  */

@@ -18,19 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FindByCoordinatesModelProvider {
+public class FindByCoordinatesModelsProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FindByCoordinatesModelProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FindByCoordinatesModelsProvider.class);
 
     private ChargingPointRepository chargingPointRepository;
     private DataFilter dataFilter;
     private CoordinatesConverter coordinatesConverter;
     private AppPropertiesBean appPropertiesBean;
 
-    public FindByCoordinatesModelProvider(ChargingPointRepository chargingPointRepository,
-                                          DataFilter dataFilter,
-                                          CoordinatesConverter coordinatesConverter,
-                                          AppPropertiesBean appPropertiesBean) {
+    public FindByCoordinatesModelsProvider(ChargingPointRepository chargingPointRepository,
+                                           DataFilter dataFilter,
+                                           CoordinatesConverter coordinatesConverter,
+                                           AppPropertiesBean appPropertiesBean) {
         this.chargingPointRepository = chargingPointRepository;
         this.dataFilter = dataFilter;
         this.coordinatesConverter = coordinatesConverter;

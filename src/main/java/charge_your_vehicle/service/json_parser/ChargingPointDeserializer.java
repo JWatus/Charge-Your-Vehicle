@@ -14,7 +14,7 @@ import java.util.*;
 
 public class ChargingPointDeserializer implements JsonDeserializer<List<ChargingPoint>> {
 
-    public static final Logger LOG = LoggerFactory.getLogger(ChargingPointDeserializer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChargingPointDeserializer.class);
 
     private Set<Country> countries = new HashSet<>();
 

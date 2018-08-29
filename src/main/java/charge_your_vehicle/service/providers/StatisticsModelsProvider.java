@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Service
-public class StatisticsModelProvider {
+public class StatisticsModelsProvider {
     private CountryStatisticsRepository countryStatisticsRepository;
     private TownStatisticsRepository townStatisticsRepository;
 
-    public StatisticsModelProvider(CountryStatisticsRepository countryStatisticsRepository,
-                                   TownStatisticsRepository townStatisticsRepository) {
+    public StatisticsModelsProvider(CountryStatisticsRepository countryStatisticsRepository,
+                                    TownStatisticsRepository townStatisticsRepository) {
         this.countryStatisticsRepository = countryStatisticsRepository;
         this.townStatisticsRepository = townStatisticsRepository;
     }

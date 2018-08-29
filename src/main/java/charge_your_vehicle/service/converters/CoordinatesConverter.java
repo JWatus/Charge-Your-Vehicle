@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoordinatesConverter {
 
-    final String DEGREE  = "\u00b0";
-    final String MINUTES  = "\'";
-    final String SECONDS  = "\"";
+    private final String DEGREE  = "\u00b0";
+    private final String MINUTES  = "\'";
+    private final String SECONDS  = "\"";
 
     public double convertCoordinatesToDecimal(String direction, String degrees, String minutes, String seconds) {
         double degree = Math.abs(Double.valueOf(degrees));

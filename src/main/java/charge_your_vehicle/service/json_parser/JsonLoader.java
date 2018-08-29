@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class JsonLoader {
-    public static final Logger LOG = LoggerFactory.getLogger(JsonLoader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JsonLoader.class);
 
     private JsonLoader() {
     }

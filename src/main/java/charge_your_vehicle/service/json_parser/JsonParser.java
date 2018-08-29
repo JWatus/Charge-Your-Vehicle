@@ -12,7 +12,6 @@ public class JsonParser {
     }
 
     public List<ChargingPoint> jsonToChargingPointList(String json) {
-        List<ChargingPoint> chargingPoints = gsonBuilder.deserialize(new ChargingPointDeserializer(), json);
-        return chargingPoints;
+        return gsonBuilder.deserialize(new ChargingPointDeserializer(), json);
     }
 }

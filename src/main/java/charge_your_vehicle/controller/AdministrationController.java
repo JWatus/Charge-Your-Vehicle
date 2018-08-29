@@ -17,7 +17,8 @@ public class AdministrationController {
     private final ApiUploadProcessorBean apiUploadProcessorBean;
     private final AdministrationModelsProvider administrationModelsProvider;
 
-    public AdministrationController(ApiUploadProcessorBean apiUploadProcessorBean, AdministrationModelsProvider administrationModelsProvider) {
+    public AdministrationController(ApiUploadProcessorBean apiUploadProcessorBean,
+                                    AdministrationModelsProvider administrationModelsProvider) {
         this.apiUploadProcessorBean = apiUploadProcessorBean;
         this.administrationModelsProvider = administrationModelsProvider;
     }

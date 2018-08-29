@@ -60,7 +60,7 @@ public class AppProperties {
         save();
     }
 
-    public void save() {
+    void save() {
         FileOutputStream out;
         try {
             out = new FileOutputStream(FILE_NAME);
@@ -96,7 +96,7 @@ public class AppProperties {
         }
     }
 
-    public void setGoogleApiKeyp(String key) {
+    void setGoogleApiKeyp(String key) {
         applicationProps.setProperty(GOOGLE_API_KEY_PROPERTY_NAME, key);
     }
 }

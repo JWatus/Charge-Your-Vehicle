@@ -40,7 +40,7 @@ After doing this press Connect button.
 Few steps how to start and options which You can find in this application are described beneath.
 
 #### Setting properties
-'*Properties*' section You can find in the '*Administration*' panel. You can set there the unit in which range for search charging points will be taken. Available options are: miles, kilometers and meters. 
+'*Properties*' section You can find in the '*Administration*' panel. You can set there the unit, in which range for searching charging points will be taken. Available options are: miles, kilometers and meters. 
 
 If You want to be sure that Google Map will be properly displayed You should set Your own Google API key beneath unit set field. Without it there is a possibility that map with markers of charging points will not be displayed or address to coordinates converter will not work. 
 
